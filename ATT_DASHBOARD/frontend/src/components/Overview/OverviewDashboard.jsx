@@ -5,22 +5,22 @@ import {
   PieChart, Pie, Cell, BarChart, Bar, Legend,
 } from 'recharts';
 import { useKPIMetrics, useRealtimeSubscriberFeed } from '../../hooks/useRealTimeData';
-import { getATTLeadingStates, getATTOpportunityStates } from '../../data/stateProviderData';
+import { getTMobileLeadingStates, getTMobileOpportunityStates } from '../../data/stateProviderData';
 import { formatNumber, formatPercent } from '../../utils/formatters';
 
 const MONTHLY_REVENUE = [
-  { month: 'Jan', revenue: 29.8, subscribers: 131 }, { month: 'Feb', revenue: 30.1, subscribers: 132 },
-  { month: 'Mar', revenue: 30.4, subscribers: 133 }, { month: 'Apr', revenue: 29.9, subscribers: 132 },
-  { month: 'May', revenue: 30.6, subscribers: 134 }, { month: 'Jun', revenue: 30.9, subscribers: 135 },
-  { month: 'Jul', revenue: 30.2, subscribers: 134 }, { month: 'Aug', revenue: 30.7, subscribers: 135 },
-  { month: 'Sep', revenue: 31.1, subscribers: 136 }, { month: 'Oct', revenue: 30.8, subscribers: 135 },
-  { month: 'Nov', revenue: 31.3, subscribers: 136 }, { month: 'Dec', revenue: 30.1, subscribers: 134.5 },
+  { month: 'Jan', revenue: 19.4, subscribers: 126 }, { month: 'Feb', revenue: 19.6, subscribers: 127 },
+  { month: 'Mar', revenue: 19.8, subscribers: 127.5 }, { month: 'Apr', revenue: 19.7, subscribers: 127.8 },
+  { month: 'May', revenue: 20.0, subscribers: 128.3 }, { month: 'Jun', revenue: 20.3, subscribers: 128.7 },
+  { month: 'Jul', revenue: 20.0, subscribers: 128.9 }, { month: 'Aug', revenue: 20.4, subscribers: 129.2 },
+  { month: 'Sep', revenue: 20.7, subscribers: 129.6 }, { month: 'Oct', revenue: 20.5, subscribers: 129.4 },
+  { month: 'Nov', revenue: 20.9, subscribers: 129.8 }, { month: 'Dec', revenue: 20.1, subscribers: 129.5 },
 ];
 
 const NATIONAL_SHARE = [
-  { name: 'AT&T', value: 27.2, color: '#00A8E0' },
-  { name: 'Verizon', value: 28.4, color: '#CD040B' },
   { name: 'T-Mobile', value: 24.1, color: '#E20074' },
+  { name: 'Verizon', value: 28.4, color: '#CD040B' },
+  { name: 'AT&T', value: 27.2, color: '#00A8E0' },
   { name: 'Comcast', value: 5.1, color: '#CC0000' },
   { name: 'Charter', value: 3.2, color: '#0072CE' },
   { name: 'Others', value: 12.0, color: '#374151' },
@@ -78,11 +78,11 @@ const CustomTooltip = ({ active, payload, label }) => {
 const OverviewDashboard = () => {
   const metrics = useKPIMetrics();
   const feed = useRealtimeSubscriberFeed();
-  const attLeadingStates = getATTLeadingStates();
-  const opportunityStates = getATTOpportunityStates();
+  const tmobileLeadingStates = getTMobileLeadingStates();
+  const opportunityStates = getTMobileOpportunityStates();
 
   useEffect(() => {
-    logger.dataLoad('OverviewDashboard', attLeadingStates.length + opportunityStates.length, 0);
+    logger.dataLoad('OverviewDashboard', tmobileLeadingStates.length + opportunityStates.length, 0);
   }, []);
 
   const regionData = [
@@ -102,37 +102,37 @@ const OverviewDashboard = () => {
         <KPICard
           label="Total Subscribers" icon="👥"
           value={formatNumber(metrics.totalSubscribers)}
-          subValue="Wireless + Fiber"
+          subValue="Postpaid + Prepaid"
           trend="+1.8%"
-          color="#00A8E0"
+          color="#E20074"
         />
         <KPICard
           label="National Market Share" icon="📈"
-          value={formatPercent(metrics.attMarketShare)}
+          value={formatPercent(metrics.tmobileMarketShare)}
           subValue="Wireless subscribers"
           trend="+0.3%"
           color="#10B981"
         />
         <KPICard
-          label="States AT&T Leads" icon="🏆"
-          value={`${attLeadingStates.length} / 51`}
+          label="States T-Mobile Leads" icon="🏆"
+          value={`${tmobileLeadingStates.length} / 51`}
           subValue="Including DC"
-          description="Opportunity: 28 states"
+          description={`Opportunity: ${opportunityStates.length} states`}
           color="#F59E0B"
         />
         <KPICard
-          label="Fiber Subscribers" icon="🔗"
-          value={formatNumber(metrics.fiberSubscribers)}
-          subValue="AT&T Fiber + DSL"
-          trend="+12.4%"
+          label="Home Internet Subscribers" icon="🔗"
+          value={formatNumber(metrics.homeInternetSubscribers)}
+          subValue="T-Mobile 5G Home Internet"
+          trend="+18.0%"
           color="#8B5CF6"
         />
         <KPICard
           label="Quarterly Revenue" icon="💰"
           value={`$${metrics.revenueQ.toFixed(1)}B`}
-          subValue="Wireless services"
-          trend="+3.2%"
-          color="#00A8E0"
+          subValue="Service revenue"
+          trend="+3.6%"
+          color="#E20074"
         />
         <KPICard
           label="Network Uptime" icon="📡"
@@ -145,14 +145,14 @@ const OverviewDashboard = () => {
           label="Churn Rate" icon="📉"
           value={`${metrics.churnRate.toFixed(2)}%`}
           subValue="Monthly postpaid"
-          trend="-0.08%"
+          trend="-0.05%"
           color="#EF4444"
         />
         <KPICard
           label="Opportunity States" icon="🎯"
           value={opportunityStates.length}
-          subValue="High AT&T growth potential"
-          description="Target: 28 states"
+          subValue="High T-Mobile growth potential"
+          description={`Target: ${opportunityStates.length} states`}
           color="#E20074"
         />
       </div>
@@ -166,14 +166,14 @@ const OverviewDashboard = () => {
         }}>
           <div style={{ marginBottom: 20 }}>
             <div style={{ fontSize: 15, fontWeight: 700, color: '#E2E8F0' }}>Revenue & Subscriber Trend</div>
-            <div style={{ fontSize: 12, color: '#64748B', marginTop: 2 }}>12-month AT&T performance</div>
+            <div style={{ fontSize: 12, color: '#64748B', marginTop: 2 }}>12-month T-Mobile performance</div>
           </div>
           <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={MONTHLY_REVENUE}>
               <defs>
                 <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#00A8E0" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#00A8E0" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#E20074" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#E20074" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="subGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#10B981" stopOpacity={0.3} />
@@ -185,7 +185,7 @@ const OverviewDashboard = () => {
               <YAxis stroke="#475569" tick={{ fill: '#64748B', fontSize: 11 }} />
               <Tooltip content={<CustomTooltip />} />
               <Legend wrapperStyle={{ fontSize: 12, color: '#94A3B8' }} />
-              <Area type="monotone" dataKey="revenue" name="Revenue ($B)" stroke="#00A8E0" strokeWidth={2} fill="url(#revenueGrad)" dot={false} />
+              <Area type="monotone" dataKey="revenue" name="Revenue ($B)" stroke="#E20074" strokeWidth={2} fill="url(#revenueGrad)" dot={false} />
               <Area type="monotone" dataKey="subscribers" name="Subscribers (M)" stroke="#10B981" strokeWidth={2} fill="url(#subGrad)" dot={false} />
             </AreaChart>
           </ResponsiveContainer>
@@ -264,7 +264,7 @@ const OverviewDashboard = () => {
                 display: 'flex', alignItems: 'center', gap: 10, padding: '8px 0',
                 borderBottom: '1px solid #1E2D45', animation: 'fadeIn 0.3s ease',
               }}>
-                <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(0,168,224,0.12)', border: '1px solid rgba(0,168,224,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, color: '#00A8E0', fontWeight: 700, flexShrink: 0 }}>
+                <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(226,0,116,0.12)', border: '1px solid rgba(226,0,116,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, color: '#E20074', fontWeight: 700, flexShrink: 0 }}>
                   {event.state}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>

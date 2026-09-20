@@ -17,7 +17,7 @@ export const PROVIDERS = [
     npsScore: 12,
     satisfactionScore: 3.8,
     networkCoverage: 97.0,
-    isATT: true,
+    isHomeCarrier: false,
   },
   {
     id: "verizon",
@@ -37,7 +37,7 @@ export const PROVIDERS = [
     npsScore: 18,
     satisfactionScore: 3.9,
     networkCoverage: 98.3,
-    isATT: false,
+    isHomeCarrier: false,
   },
   {
     id: "tmobile",
@@ -57,7 +57,7 @@ export const PROVIDERS = [
     npsScore: 22,
     satisfactionScore: 4.1,
     networkCoverage: 96.5,
-    isATT: false,
+    isHomeCarrier: true,
   },
   {
     id: "comcast",
@@ -77,7 +77,7 @@ export const PROVIDERS = [
     npsScore: -5,
     satisfactionScore: 3.2,
     networkCoverage: 58.0,
-    isATT: false,
+    isHomeCarrier: false,
   },
   {
     id: "charter",
@@ -97,7 +97,7 @@ export const PROVIDERS = [
     npsScore: -8,
     satisfactionScore: 3.1,
     networkCoverage: 45.0,
-    isATT: false,
+    isHomeCarrier: false,
   },
   {
     id: "cox",
@@ -117,7 +117,7 @@ export const PROVIDERS = [
     npsScore: 2,
     satisfactionScore: 3.5,
     networkCoverage: 19.0,
-    isATT: false,
+    isHomeCarrier: false,
   },
   {
     id: "dish",
@@ -137,7 +137,7 @@ export const PROVIDERS = [
     npsScore: -2,
     satisfactionScore: 3.3,
     networkCoverage: 72.0,
-    isATT: false,
+    isHomeCarrier: false,
   },
   {
     id: "uscellular",
@@ -157,7 +157,7 @@ export const PROVIDERS = [
     npsScore: 8,
     satisfactionScore: 3.7,
     networkCoverage: 35.0,
-    isATT: false,
+    isHomeCarrier: false,
   },
   {
     id: "frontier",
@@ -177,7 +177,7 @@ export const PROVIDERS = [
     npsScore: -4,
     satisfactionScore: 3.3,
     networkCoverage: 24.0,
-    isATT: false,
+    isHomeCarrier: false,
   },
   {
     id: "lumen",
@@ -197,7 +197,7 @@ export const PROVIDERS = [
     npsScore: -6,
     satisfactionScore: 3.0,
     networkCoverage: 37.0,
-    isATT: false,
+    isHomeCarrier: false,
   },
 ];
 

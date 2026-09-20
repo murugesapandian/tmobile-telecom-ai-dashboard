@@ -26,9 +26,9 @@ export const LEADER_COLORS = {
   "Spectrum": "#0072CE",
 };
 
-export const ATT_HEAT_SCALE = scaleLinear()
+export const HOME_CARRIER_HEAT_SCALE = scaleLinear()
   .domain([10, 25, 42])
-  .range(["#1E3A5F", "#0057A6", "#00A8E0"]);
+  .range(["#3A1E33", "#9B004E", "#E20074"]);
 
 export const OPPORTUNITY_COLORS = {
   low: "#10B981",
@@ -42,11 +42,11 @@ export const getProviderColor = (name) =>
 export const getLeaderColor = (leader) =>
   LEADER_COLORS[leader] || "#6B7280";
 
-export const getATTHeatColor = (attShare) => {
-  if (attShare >= 35) return "#00C8FF";
-  if (attShare >= 28) return "#00A8E0";
-  if (attShare >= 20) return "#0057A6";
-  if (attShare >= 14) return "#003D7A";
+export const getHomeCarrierHeatColor = (tmobileShare) => {
+  if (tmobileShare >= 30) return "#FF3DA6";
+  if (tmobileShare >= 24) return "#E20074";
+  if (tmobileShare >= 18) return "#9B004E";
+  if (tmobileShare >= 14) return "#5C0030";
   return "#1A2535";
 };
 

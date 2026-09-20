@@ -35,17 +35,17 @@ public class StateAnalyticsService {
     }
 
     public List<StateData> getHighOpportunityStates() {
-        return stateDataRepository.findByAttOpportunity("high");
+        return stateDataRepository.findByTmobileOpportunity("high");
     }
 
     public Map<String, Object> getNationalSummary() {
         List<StateData> all = stateDataRepository.findAll();
         Map<String, Object> summary = new HashMap<>();
         summary.put("totalStates", all.size());
-        summary.put("attLeadingStates", all.stream().filter(s -> "AT&T".equals(s.getMarketLeader())).count());
-        summary.put("avgAttShare", stateDataRepository.findNationalAvgAttShare());
-        summary.put("highOpportunityStates", stateDataRepository.findByAttOpportunity("high").size());
-        summary.put("regionalBreakdown", stateDataRepository.findAvgAttShareByRegion());
+        summary.put("tmobileLeadingStates", all.stream().filter(s -> "T-Mobile".equals(s.getMarketLeader())).count());
+        summary.put("avgTmobileShare", stateDataRepository.findNationalAvgTmobileShare());
+        summary.put("highOpportunityStates", stateDataRepository.findByTmobileOpportunity("high").size());
+        summary.put("regionalBreakdown", stateDataRepository.findAvgTmobileShareByRegion());
         return summary;
     }
 
@@ -67,12 +67,12 @@ public class StateAnalyticsService {
 
         StateData saved = stateDataRepository.save(state);
         eventPublisher.publishStateUpdate(saved);
-        log.info("State {} market share updated. AT&T: {}%", stateId, saved.getAttShare());
+        log.info("State {} market share updated. T-Mobile: {}%", stateId, saved.getTmobileShare());
         return saved;
     }
 
-    public List<StateData> getTopAttStates(int limit) {
-        return stateDataRepository.findAllOrderByAttShareDesc()
+    public List<StateData> getTopTMobileStates(int limit) {
+        return stateDataRepository.findAllOrderByTmobileShareDesc()
             .stream().limit(limit).toList();
     }
 }

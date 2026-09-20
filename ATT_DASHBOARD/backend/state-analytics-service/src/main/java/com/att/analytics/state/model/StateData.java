@@ -45,8 +45,8 @@ public class StateData {
 
     private String marketLeader;
 
-    @Column(name = "att_opportunity")
-    private String attOpportunity; // low, medium, high
+    @Column(name = "tmobile_opportunity")
+    private String tmobileOpportunity; // low, medium, high
 
     @Column(name = "growth_trend")
     private String growthTrend;

@@ -17,7 +17,7 @@ import java.util.Map;
 @Slf4j
 public class StateDataEventPublisher {
 
-    private static final String TOPIC = "att.state.data.updates";
+    private static final String TOPIC = "tmo.state.data.updates";
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
@@ -51,7 +51,7 @@ public class StateDataEventPublisher {
             event.put("timestamp", Instant.now().toString());
 
             String payload = objectMapper.writeValueAsString(event);
-            kafkaTemplate.send("att.realtime.feed", stateId, payload);
+            kafkaTemplate.send("tmo.realtime.feed", stateId, payload);
         } catch (JsonProcessingException e) {
             log.error("Failed to publish real-time feed event: {}", e.getMessage());
         }

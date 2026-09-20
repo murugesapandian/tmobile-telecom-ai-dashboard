@@ -13,17 +13,17 @@ public interface StateDataRepository extends JpaRepository<StateData, String> {
 
     List<StateData> findByMarketLeader(String leader);
 
-    List<StateData> findByAttOpportunity(String opportunity);
+    List<StateData> findByTmobileOpportunity(String opportunity);
 
-    @Query("SELECT s FROM StateData s ORDER BY s.attShare DESC")
-    List<StateData> findAllOrderByAttShareDesc();
+    @Query("SELECT s FROM StateData s ORDER BY s.tmobileShare DESC")
+    List<StateData> findAllOrderByTmobileShareDesc();
 
-    @Query("SELECT s FROM StateData s WHERE s.attShare < :threshold")
-    List<StateData> findLowAttShareStates(Double threshold);
+    @Query("SELECT s FROM StateData s WHERE s.tmobileShare < :threshold")
+    List<StateData> findLowTmobileShareStates(Double threshold);
 
-    @Query("SELECT AVG(s.attShare) FROM StateData s")
-    Double findNationalAvgAttShare();
+    @Query("SELECT AVG(s.tmobileShare) FROM StateData s")
+    Double findNationalAvgTmobileShare();
 
-    @Query("SELECT s.region, AVG(s.attShare) FROM StateData s GROUP BY s.region")
-    List<Object[]> findAvgAttShareByRegion();
+    @Query("SELECT s.region, AVG(s.tmobileShare) FROM StateData s GROUP BY s.region")
+    List<Object[]> findAvgTmobileShareByRegion();
 }

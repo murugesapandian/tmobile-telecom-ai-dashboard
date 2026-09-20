@@ -18,7 +18,7 @@ public class DataUpdateConsumer {
     private final DashboardWebSocketHandler webSocketHandler;
     private final ObjectMapper objectMapper;
 
-    @KafkaListener(topics = "att.state.data.updates", groupId = "event-streaming-group")
+    @KafkaListener(topics = "tmo.state.data.updates", groupId = "event-streaming-group")
     public void consumeStateUpdate(String message) {
         try {
             Map<String, Object> event = objectMapper.readValue(message, Map.class);
@@ -30,7 +30,7 @@ public class DataUpdateConsumer {
         }
     }
 
-    @KafkaListener(topics = "att.provider.updates", groupId = "event-streaming-group")
+    @KafkaListener(topics = "tmo.provider.updates", groupId = "event-streaming-group")
     public void consumeProviderUpdate(String message) {
         try {
             Map<String, Object> event = objectMapper.readValue(message, Map.class);
@@ -41,7 +41,7 @@ public class DataUpdateConsumer {
         }
     }
 
-    @KafkaListener(topics = "att.feedback.aggregated", groupId = "event-streaming-group")
+    @KafkaListener(topics = "tmo.feedback.aggregated", groupId = "event-streaming-group")
     public void consumeFeedbackUpdate(String message) {
         try {
             Map<String, Object> event = objectMapper.readValue(message, Map.class);
@@ -52,7 +52,7 @@ public class DataUpdateConsumer {
         }
     }
 
-    @KafkaListener(topics = "att.realtime.feed", groupId = "event-streaming-group")
+    @KafkaListener(topics = "tmo.realtime.feed", groupId = "event-streaming-group")
     public void consumeRealtimeFeed(String message) {
         try {
             Map<String, Object> event = objectMapper.readValue(message, Map.class);

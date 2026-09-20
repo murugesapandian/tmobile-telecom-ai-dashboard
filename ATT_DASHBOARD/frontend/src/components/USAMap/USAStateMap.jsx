@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { STATE_PROVIDER_DATA, REGIONS } from '../../data/stateProviderData';
-import { getATTHeatColor, getLeaderColor } from '../../utils/colorUtils';
+import { getHomeCarrierHeatColor, getLeaderColor } from '../../utils/colorUtils';
 import { formatPopulation, formatPercent } from '../../utils/formatters';
 import logger from '../../services/LoggingService';
 
@@ -15,8 +15,8 @@ const FIPS_TO_STATE = STATE_PROVIDER_DATA.reduce((acc, s) => {
 
 const MAP_MODES = [
   { id: 'leader', label: 'Market Leader', description: 'Shows dominant provider per state' },
-  { id: 'att', label: 'AT&T Share', description: 'AT&T market presence heatmap' },
-  { id: 'opportunity', label: 'AT&T Opportunity', description: 'Growth potential for AT&T' },
+  { id: 'tmobile', label: 'T-Mobile Share', description: 'T-Mobile market presence heatmap' },
+  { id: 'opportunity', label: 'T-Mobile Opportunity', description: 'Growth potential for T-Mobile' },
 ];
 
 const StateDetailPanel = ({ state, onClose }) => {
@@ -58,16 +58,16 @@ const StateDetailPanel = ({ state, onClose }) => {
         <div style={{ fontSize: 16, fontWeight: 700, color: getLeaderColor(state.leader) }}>{state.leader}</div>
       </div>
 
-      {/* AT&T opportunity */}
+      {/* T-Mobile opportunity */}
       <div style={{
         padding: '10px 14px', borderRadius: 10, marginBottom: 20,
         background: 'rgba(255,255,255,0.03)', border: '1px solid #1E2D45',
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       }}>
         <div>
-          <div style={{ fontSize: 10, color: '#64748B', fontWeight: 700, letterSpacing: '1px' }}>AT&T OPPORTUNITY</div>
-          <div style={{ fontSize: 14, fontWeight: 700, color: opportunityColor[state.attOpportunity], marginTop: 2, textTransform: 'uppercase' }}>
-            {state.attOpportunity}
+          <div style={{ fontSize: 10, color: '#64748B', fontWeight: 700, letterSpacing: '1px' }}>T-MOBILE OPPORTUNITY</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: opportunityColor[state.tmobileOpportunity], marginTop: 2, textTransform: 'uppercase' }}>
+            {state.tmobileOpportunity}
           </div>
         </div>
         <div style={{ textAlign: 'right' }}>
@@ -97,7 +97,7 @@ const StateDetailPanel = ({ state, onClose }) => {
         {providers.map(p => (
           <div key={p.name}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-              <span style={{ fontSize: 12, color: p.name === 'AT&T' ? '#00A8E0' : '#94A3B8', fontWeight: p.name === 'AT&T' ? 700 : 400 }}>{p.name}</span>
+              <span style={{ fontSize: 12, color: p.name === 'T-Mobile' ? '#E20074' : '#94A3B8', fontWeight: p.name === 'T-Mobile' ? 700 : 400 }}>{p.name}</span>
               <span style={{ fontSize: 12, color: p.color, fontWeight: 600 }}>{formatPercent(p.share)}</span>
             </div>
             <div style={{ height: 4, background: '#1E2D45', borderRadius: 2 }}>
@@ -121,16 +121,16 @@ const Legend = ({ mode }) => {
       ))}
     </div>
   );
-  if (mode === 'att') return (
+  if (mode === 'tmobile') return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
       <span style={{ fontSize: 11, color: '#64748B' }}>Low</span>
-      <div style={{ width: 120, height: 8, borderRadius: 4, background: 'linear-gradient(90deg, #1A2535, #0057A6, #00C8FF)' }} />
-      <span style={{ fontSize: 11, color: '#64748B' }}>High AT&T Share</span>
+      <div style={{ width: 120, height: 8, borderRadius: 4, background: 'linear-gradient(90deg, #1A2535, #9B004E, #FF3DA6)' }} />
+      <span style={{ fontSize: 11, color: '#64748B' }}>High T-Mobile Share</span>
     </div>
   );
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-      {[['Low (AT&T leads)', '#10B981'], ['Medium', '#F59E0B'], ['High (Growth potential)', '#EF4444']].map(([label, color]) => (
+      {[['Low (T-Mobile leads)', '#10B981'], ['Medium', '#F59E0B'], ['High (Growth potential)', '#EF4444']].map(([label, color]) => (
         <div key={color} style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11 }}>
           <div style={{ width: 10, height: 10, borderRadius: 2, background: color }} />
           <span style={{ color: '#94A3B8' }}>{label}</span>
@@ -141,7 +141,7 @@ const Legend = ({ mode }) => {
 };
 
 const USAStateMap = ({ liveData }) => {
-  const [mapMode, setMapMode] = useState('att');
+  const [mapMode, setMapMode] = useState('tmobile');
   const [selectedState, setSelectedState] = useState(null);
   const [hoveredState, setHoveredState] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState('All Regions');
@@ -169,16 +169,16 @@ const USAStateMap = ({ liveData }) => {
     const state = FIPS_TO_STATE[fips];
     if (!state) return '#1A2535';
     if (mapMode === 'leader') return getLeaderColor(state.leader);
-    if (mapMode === 'att') return getATTHeatColor(state.att);
+    if (mapMode === 'tmobile') return getHomeCarrierHeatColor(state.tmobile);
     const oColors = { low: '#10B981', medium: '#F59E0B', high: '#EF4444' };
-    return oColors[state.attOpportunity] || '#374151';
+    return oColors[state.tmobileOpportunity] || '#374151';
   };
 
   const stats = {
-    attLeading: stateData.filter(s => s.leader === 'AT&T').length,
-    verizonLeading: stateData.filter(s => s.leader === 'Verizon').length,
     tmobileLeading: stateData.filter(s => s.leader === 'T-Mobile').length,
-    highOpportunity: stateData.filter(s => s.attOpportunity === 'high').length,
+    verizonLeading: stateData.filter(s => s.leader === 'Verizon').length,
+    attLeading: stateData.filter(s => s.leader === 'AT&T').length,
+    highOpportunity: stateData.filter(s => s.tmobileOpportunity === 'high').length,
   };
 
   return (
@@ -191,9 +191,9 @@ const USAStateMap = ({ liveData }) => {
             title={mode.description}
             style={{
               padding: '7px 16px', borderRadius: 8, cursor: 'pointer', fontSize: 12, fontWeight: 600,
-              background: mapMode === mode.id ? 'rgba(0,168,224,0.15)' : 'rgba(255,255,255,0.04)',
-              border: `1px solid ${mapMode === mode.id ? 'rgba(0,168,224,0.5)' : '#1E2D45'}`,
-              color: mapMode === mode.id ? '#00A8E0' : '#94A3B8',
+              background: mapMode === mode.id ? 'rgba(226,0,116,0.15)' : 'rgba(255,255,255,0.04)',
+              border: `1px solid ${mapMode === mode.id ? 'rgba(226,0,116,0.5)' : '#1E2D45'}`,
+              color: mapMode === mode.id ? '#E20074' : '#94A3B8',
               transition: 'all 0.2s',
             }}>
             {mode.label}
@@ -210,9 +210,9 @@ const USAStateMap = ({ liveData }) => {
       {/* Stats row */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
         {[
-          { label: 'AT&T Leading States', value: stats.attLeading, color: '#00A8E0', icon: '🏆' },
+          { label: 'T-Mobile Leading States', value: stats.tmobileLeading, color: '#E20074', icon: '🏆' },
           { label: 'Verizon Leading States', value: stats.verizonLeading, color: '#CD040B', icon: '📍' },
-          { label: 'T-Mobile Leading States', value: stats.tmobileLeading, color: '#E20074', icon: '📍' },
+          { label: 'AT&T Leading States', value: stats.attLeading, color: '#00A8E0', icon: '📍' },
           { label: 'High Opportunity States', value: stats.highOpportunity, color: '#EF4444', icon: '🎯' },
         ].map(stat => (
           <div key={stat.label} style={{
@@ -275,13 +275,13 @@ const USAStateMap = ({ liveData }) => {
                             },
                             hover: {
                               fill: isSelected ? getColor(fips) : '#2D4A6B',
-                              stroke: '#00A8E0',
+                              stroke: '#E20074',
                               strokeWidth: 1.5,
                               outline: 'none',
                               cursor: 'pointer',
                             },
                             pressed: {
-                              fill: '#00A8E0',
+                              fill: '#E20074',
                               outline: 'none',
                             },
                           }}
@@ -314,7 +314,7 @@ const USAStateMap = ({ liveData }) => {
             }}>
               <span style={{ fontSize: 13, fontWeight: 700, color: '#E2E8F0' }}>{s.name}</span>
               <span style={{ fontSize: 12, color: getLeaderColor(s.leader) }}>Leader: {s.leader}</span>
-              <span style={{ fontSize: 12, color: '#00A8E0' }}>AT&T: {s.att.toFixed(1)}%</span>
+              <span style={{ fontSize: 12, color: '#E20074' }}>T-Mobile: {s.tmobile.toFixed(1)}%</span>
               <span style={{ fontSize: 12, color: '#94A3B8' }}>Pop: {formatPopulation(s.population)}</span>
             </div>
           );
@@ -343,13 +343,13 @@ const USAStateMap = ({ liveData }) => {
                 .filter(s => selectedRegion === 'All Regions' || s.region === selectedRegion)
                 .map((state, i) => (
                   <tr key={state.id}
-                    onClick={() => { setSelectedState(state); logger.click('USAStateMap', 'TABLE_ROW_CLICK', { state: state.name, leader: state.leader, attShare: state.att.toFixed(1) }); }}
+                    onClick={() => { setSelectedState(state); logger.click('USAStateMap', 'TABLE_ROW_CLICK', { state: state.name, leader: state.leader, tmobileShare: state.tmobile.toFixed(1) }); }}
                     style={{
                       borderBottom: '1px solid #1A2535',
                       background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)',
                       cursor: 'pointer', transition: 'background 0.15s',
                     }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,168,224,0.06)'}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(226,0,116,0.06)'}
                     onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)'}
                   >
                     <td style={{ padding: '10px 16px', fontWeight: 600, color: '#E2E8F0' }}>{state.name}</td>
@@ -365,8 +365,8 @@ const USAStateMap = ({ liveData }) => {
                       </span>
                     </td>
                     <td style={{ padding: '10px 16px' }}>
-                      <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 600, background: state.attOpportunity === 'high' ? 'rgba(239,68,68,0.12)' : state.attOpportunity === 'medium' ? 'rgba(245,158,11,0.12)' : 'rgba(16,185,129,0.12)', color: state.attOpportunity === 'high' ? '#EF4444' : state.attOpportunity === 'medium' ? '#F59E0B' : '#10B981' }}>
-                        {state.attOpportunity.toUpperCase()}
+                      <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 600, background: state.tmobileOpportunity === 'high' ? 'rgba(239,68,68,0.12)' : state.tmobileOpportunity === 'medium' ? 'rgba(245,158,11,0.12)' : 'rgba(16,185,129,0.12)', color: state.tmobileOpportunity === 'high' ? '#EF4444' : state.tmobileOpportunity === 'medium' ? '#F59E0B' : '#10B981' }}>
+                        {state.tmobileOpportunity.toUpperCase()}
                       </span>
                     </td>
                     <td style={{ padding: '10px 16px', color: '#10B981', fontWeight: 600 }}>{state.trend}</td>

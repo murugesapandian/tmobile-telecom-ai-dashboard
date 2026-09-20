@@ -9,28 +9,28 @@ const CheckIcon = ({ available }) => (
   </span>
 );
 
-const PriceBadge = ({ price, isATT }) => (
+const PriceBadge = ({ price, isHomeCarrier, color }) => (
   <div style={{
     fontSize: 22, fontWeight: 800,
-    color: isATT ? '#00A8E0' : '#E2E8F0',
+    color: isHomeCarrier ? color : '#E2E8F0',
   }}>
     ${price}
     <span style={{ fontSize: 11, fontWeight: 400, color: '#64748B' }}>/mo</span>
   </div>
 );
 
-const FeatureBadge = ({ text, highlight }) => (
+const FeatureBadge = ({ text, highlight, color = '#E20074' }) => (
   <span style={{
     padding: '2px 8px', borderRadius: 6, fontSize: 10, fontWeight: 600,
-    background: highlight ? 'rgba(0,168,224,0.12)' : 'rgba(255,255,255,0.04)',
-    color: highlight ? '#00A8E0' : '#94A3B8',
-    border: `1px solid ${highlight ? 'rgba(0,168,224,0.3)' : '#1E2D45'}`,
+    background: highlight ? `${color}20` : 'rgba(255,255,255,0.04)',
+    color: highlight ? color : '#94A3B8',
+    border: `1px solid ${highlight ? `${color}50` : '#1E2D45'}`,
   }}>
     {text}
   </span>
 );
 
-const PlanCard = ({ plan, color, isATT }) => (
+const PlanCard = ({ plan, color, isHomeCarrier }) => (
   <div style={{
     background: plan.recommended
       ? 'linear-gradient(145deg, #0D1E30, #091628)'
@@ -54,7 +54,7 @@ const PlanCard = ({ plan, color, isATT }) => (
       }}>{plan.badge}</div>
     )}
     <div style={{ fontSize: 12, fontWeight: 700, color: '#E2E8F0', marginBottom: 4, paddingRight: 60 }}>{plan.name}</div>
-    <PriceBadge price={plan.price} isATT={isATT} />
+    <PriceBadge price={plan.price} isHomeCarrier={isHomeCarrier} color={color} />
     <div style={{ fontSize: 9, color: '#475569', marginBottom: 12 }}>{plan.priceUnit}</div>
 
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -77,7 +77,7 @@ const PlanCard = ({ plan, color, isATT }) => (
         <div style={{ fontSize: 9, color: '#475569', fontWeight: 700, marginBottom: 6, letterSpacing: '0.5px' }}>INCLUDED PERKS</div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
           {plan.perks.slice(0, 3).map((p, i) => (
-            <FeatureBadge key={i} text={p.length > 25 ? p.slice(0, 22) + '...' : p} highlight={isATT && i === 0} />
+            <FeatureBadge key={i} text={p.length > 25 ? p.slice(0, 22) + '...' : p} highlight={isHomeCarrier && i === 0} color={color} />
           ))}
         </div>
       </div>
@@ -88,12 +88,12 @@ const PlanCard = ({ plan, color, isATT }) => (
 const ProviderSection = ({ provider }) => (
   <div style={{
     background: 'linear-gradient(145deg, #111C2E, #0D1526)',
-    border: `2px solid ${provider.isATT ? provider.color + '50' : '#1E2D45'}`,
+    border: `2px solid ${provider.isHomeCarrier ? provider.color + '50' : '#1E2D45'}`,
     borderRadius: 16, overflow: 'hidden', marginBottom: 16,
   }}>
     <div style={{
       padding: '14px 20px',
-      background: provider.isATT ? `linear-gradient(90deg, ${provider.color}15, transparent)` : 'transparent',
+      background: provider.isHomeCarrier ? `linear-gradient(90deg, ${provider.color}15, transparent)` : 'transparent',
       borderBottom: '1px solid #1E2D45',
       display: 'flex', alignItems: 'center', gap: 12,
     }}>
@@ -102,7 +102,7 @@ const ProviderSection = ({ provider }) => (
         background: `${provider.color}20`, color: provider.color,
         border: `1px solid ${provider.color}40`,
       }}>{provider.provider}</div>
-      {provider.isATT && (
+      {provider.isHomeCarrier && (
         <span style={{ fontSize: 11, fontWeight: 700, color: '#10B981', background: 'rgba(16,185,129,0.12)', padding: '2px 8px', borderRadius: 6, border: '1px solid rgba(16,185,129,0.25)' }}>
           ← OUR COMPANY
         </span>
@@ -111,7 +111,7 @@ const ProviderSection = ({ provider }) => (
     <div style={{ padding: '16px 20px' }}>
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         {provider.plans.map((plan, i) => (
-          <PlanCard key={i} plan={plan} color={provider.color} isATT={provider.isATT} />
+          <PlanCard key={i} plan={plan} color={provider.color} isHomeCarrier={provider.isHomeCarrier} />
         ))}
       </div>
     </div>
@@ -120,7 +120,7 @@ const ProviderSection = ({ provider }) => (
 
 const ComparisonTable = ({ plans, type }) => {
   const allPlans = plans.flatMap(p =>
-    p.plans.map(plan => ({ ...plan, provider: p.provider, color: p.color, isATT: p.isATT }))
+    p.plans.map(plan => ({ ...plan, provider: p.provider, color: p.color, isHomeCarrier: p.isHomeCarrier }))
   );
 
   return (
@@ -142,17 +142,17 @@ const ComparisonTable = ({ plans, type }) => {
             <tr key={i}
               style={{
                 borderBottom: '1px solid #1A2535',
-                background: plan.isATT ? 'rgba(0,168,224,0.05)' : i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.01)',
+                background: plan.isHomeCarrier ? 'rgba(226,0,116,0.05)' : i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.01)',
               }}
             >
-              <td style={{ padding: '10px 16px', fontWeight: 600, color: plan.isATT ? '#00A8E0' : '#E2E8F0', position: 'sticky', left: 0, background: plan.isATT ? 'rgba(0,50,80,0.9)' : '#0A1020', zIndex: 1 }}>
+              <td style={{ padding: '10px 16px', fontWeight: 600, color: plan.isHomeCarrier ? plan.color : '#E2E8F0', position: 'sticky', left: 0, background: plan.isHomeCarrier ? 'rgba(60,0,30,0.9)' : '#0A1020', zIndex: 1 }}>
                 {plan.name}
                 {plan.recommended && <span style={{ marginLeft: 6, fontSize: 9, color: '#10B981' }}>★ BEST</span>}
               </td>
               <td style={{ padding: '10px 16px' }}>
                 <span style={{ color: plan.color, fontWeight: 600, fontSize: 11 }}>{plan.provider}</span>
               </td>
-              <td style={{ padding: '10px 16px', textAlign: 'right', fontWeight: 700, color: plan.isATT ? '#00A8E0' : '#E2E8F0' }}>${plan.price}/mo</td>
+              <td style={{ padding: '10px 16px', textAlign: 'right', fontWeight: 700, color: plan.isHomeCarrier ? plan.color : '#E2E8F0' }}>${plan.price}/mo</td>
               <td style={{ padding: '10px 16px', color: '#94A3B8' }}>{plan.data || plan.speed}</td>
               <td style={{ padding: '10px 16px', color: '#94A3B8' }}>{plan.hotspot || plan.type}</td>
               <td style={{ padding: '10px 16px', color: '#94A3B8', fontSize: 11 }}>{plan.network || plan.contract}</td>
@@ -189,9 +189,9 @@ const PlanComparison = () => {
             <button key={t.id} onClick={() => { setPlanType(t.id); logger.click('PlanComparison', 'PLAN_TYPE', { type: t.id }); }}
               style={{
                 padding: '8px 18px', borderRadius: 7, cursor: 'pointer', fontSize: 13, fontWeight: 600,
-                background: planType === t.id ? 'linear-gradient(135deg, rgba(0,168,224,0.2), rgba(0,87,166,0.2))' : 'transparent',
-                border: `1px solid ${planType === t.id ? '#00A8E0' : 'transparent'}`,
-                color: planType === t.id ? '#00A8E0' : '#64748B', transition: 'all 0.2s',
+                background: planType === t.id ? 'linear-gradient(135deg, rgba(226,0,116,0.2), rgba(155,0,78,0.2))' : 'transparent',
+                border: `1px solid ${planType === t.id ? '#E20074' : 'transparent'}`,
+                color: planType === t.id ? '#E20074' : '#64748B', transition: 'all 0.2s',
               }}>
               {t.icon} {t.label}
             </button>
@@ -207,9 +207,9 @@ const PlanComparison = () => {
             <button key={m.id} onClick={() => { setViewMode(m.id); logger.click('PlanComparison', 'VIEW_MODE', { mode: m.id }); }}
               style={{
                 padding: '7px 14px', borderRadius: 8, cursor: 'pointer', fontSize: 12,
-                background: viewMode === m.id ? 'rgba(0,168,224,0.15)' : 'transparent',
-                border: `1px solid ${viewMode === m.id ? '#00A8E0' : '#1E2D45'}`,
-                color: viewMode === m.id ? '#00A8E0' : '#64748B',
+                background: viewMode === m.id ? 'rgba(226,0,116,0.15)' : 'transparent',
+                border: `1px solid ${viewMode === m.id ? '#E20074' : '#1E2D45'}`,
+                color: viewMode === m.id ? '#E20074' : '#64748B',
               }}>
               {m.label}
             </button>
@@ -217,15 +217,15 @@ const PlanComparison = () => {
         </div>
       </div>
 
-      {/* AT&T vs Competition summary */}
+      {/* T-Mobile vs Competition summary */}
       <div style={{
         display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12,
       }}>
         {[
-          { label: 'AT&T Best Plan', value: planType === 'wireless' ? '$85/mo' : '$180/mo', sub: 'Premium unlimited', color: '#00A8E0' },
+          { label: 'T-Mobile Best Plan', value: planType === 'wireless' ? '$90/mo' : '$60/mo', sub: planType === 'wireless' ? 'Go5G Plus' : 'Business Internet', color: '#E20074' },
           { label: 'Cheapest Competitor', value: planType === 'wireless' ? '$29/mo' : '$30/mo', sub: 'Spectrum Basic', color: '#0072CE' },
           { label: 'Plans Compared', value: plans.reduce((s, p) => s + p.plans.length, 0), sub: `Across ${plans.length} providers`, color: '#F59E0B' },
-          { label: 'AT&T Value Rank', value: planType === 'wireless' ? '#3 / 5' : '#2 / 5', sub: 'By value for money', color: '#10B981' },
+          { label: 'T-Mobile Value Rank', value: planType === 'wireless' ? '#1 / 5' : '#3 / 5', sub: 'By value for money', color: '#10B981' },
         ].map(item => (
           <div key={item.label} style={{
             background: 'linear-gradient(145deg, #111C2E, #0D1526)', border: `1px solid ${item.color}25`, borderRadius: 12, padding: '16px 18px',
@@ -249,7 +249,7 @@ const PlanComparison = () => {
         <div style={{ background: 'linear-gradient(145deg, #111C2E, #0D1526)', border: '1px solid #1E2D45', borderRadius: 16, overflow: 'hidden' }}>
           <div style={{ padding: '14px 20px', borderBottom: '1px solid #1E2D45' }}>
             <div style={{ fontSize: 14, fontWeight: 700, color: '#E2E8F0' }}>Complete Plan Comparison — {planType === 'wireless' ? 'Wireless' : 'Broadband'}</div>
-            <div style={{ fontSize: 11, color: '#64748B', marginTop: 2 }}>AT&T plans highlighted in blue • Sorted by price</div>
+            <div style={{ fontSize: 11, color: '#64748B', marginTop: 2 }}>T-Mobile plans highlighted in magenta • Sorted by price</div>
           </div>
           <ComparisonTable plans={plans} type={planType} />
         </div>
@@ -269,26 +269,26 @@ const PlanComparison = () => {
                 <Tooltip formatter={(v) => [`$${v}/mo`, 'Price']} contentStyle={{ background: '#0D1526', border: '1px solid #1E2D45', borderRadius: 8, fontSize: 12 }} />
                 <Bar dataKey="price" radius={[3, 3, 0, 0]}>
                   {priceCompareData.map((entry, i) => (
-                    <Cell key={i} fill={entry.color} opacity={entry.provider === 'AT&T' ? 1 : 0.7} />
+                    <Cell key={i} fill={entry.color} opacity={entry.provider === 'T-Mobile' ? 1 : 0.7} />
                   ))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
 
-          {/* Key differences AT&T vs competitors */}
+          {/* Key differences T-Mobile vs competitors */}
           <div style={{ background: 'linear-gradient(145deg, #111C2E, #0D1526)', border: '1px solid #1E2D45', borderRadius: 16, padding: 24 }}>
-            <div style={{ fontSize: 15, fontWeight: 700, color: '#E2E8F0', marginBottom: 16 }}>AT&T Competitive Advantages vs Key Rivals</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: '#E2E8F0', marginBottom: 16 }}>T-Mobile Competitive Advantages vs Key Rivals</div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
               {[
-                { vs: 'vs Verizon', pros: ['Lower entry price', 'Better fiber availability', 'FirstNet priority for safety'], cons: ['Lower NPS score', 'Less international coverage', 'Smaller 5G UW footprint'] },
-                { vs: 'vs T-Mobile', pros: ['Better enterprise solutions', 'Superior rural FirstNet coverage', 'More fiber broadband options'], cons: ['Higher price points', 'Lower customer satisfaction', 'Less transparent pricing'] },
-                { vs: 'vs Comcast', pros: ['True wireless mobile service', 'Better 5G network', 'No equipment rental fees', 'Better rural coverage'], cons: ['Higher broadband prices in some markets', 'Less TV content bundling', 'Smaller broadband footprint in midwest'] },
+                { vs: 'vs AT&T', pros: ['Lower price points on comparable tiers', 'Faster average 5G speeds (Ultra Capacity)', 'Higher customer satisfaction & NPS'], cons: ['No FirstNet-style public-safety network', 'Smaller fiber broadband footprint', 'Fewer bundled TV/streaming options'] },
+                { vs: 'vs Verizon', pros: ['More generous international roaming/data', 'Better value on mid-tier unlimited plans', 'Netflix/Apple TV+ perks included higher up the stack'], cons: ['Historically less consistent rural coverage', 'Smaller enterprise/government footprint', 'Newer entrant in fixed wireless at scale'] },
+                { vs: 'vs Comcast', pros: ['True mobile network vs MVNO reliance', 'No equipment rental fees', 'Fast-growing Home Internet product'], cons: ['No cable TV bundling', 'Home Internet speeds vary with tower congestion', 'Smaller overall broadband market share'] },
               ].map(item => (
                 <div key={item.vs} style={{ padding: 16, background: 'rgba(255,255,255,0.02)', border: '1px solid #1E2D45', borderRadius: 12 }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: '#00A8E0', marginBottom: 12 }}>{item.vs}</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: '#E20074', marginBottom: 12 }}>{item.vs}</div>
                   <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontSize: 10, color: '#10B981', fontWeight: 700, marginBottom: 6 }}>AT&T ADVANTAGES</div>
+                    <div style={{ fontSize: 10, color: '#10B981', fontWeight: 700, marginBottom: 6 }}>T-MOBILE ADVANTAGES</div>
                     {item.pros.map((p, i) => <div key={i} style={{ fontSize: 11, color: '#94A3B8', marginBottom: 3, display: 'flex', gap: 6 }}><span style={{ color: '#10B981' }}>+</span>{p}</div>)}
                   </div>
                   <div>

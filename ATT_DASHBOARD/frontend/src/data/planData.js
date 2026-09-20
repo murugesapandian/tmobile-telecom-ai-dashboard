@@ -2,7 +2,7 @@ export const WIRELESS_PLANS = [
   {
     provider: "AT&T",
     color: "#00A8E0",
-    isATT: true,
+    isHomeCarrier: false,
     plans: [
       {
         name: "AT&T Value Plus",
@@ -61,7 +61,7 @@ export const WIRELESS_PLANS = [
   {
     provider: "Verizon",
     color: "#CD040B",
-    isATT: false,
+    isHomeCarrier: false,
     plans: [
       {
         name: "Verizon Start Unlimited",
@@ -120,7 +120,7 @@ export const WIRELESS_PLANS = [
   {
     provider: "T-Mobile",
     color: "#E20074",
-    isATT: false,
+    isHomeCarrier: true,
     plans: [
       {
         name: "T-Mobile Essentials",
@@ -179,7 +179,7 @@ export const WIRELESS_PLANS = [
   {
     provider: "Comcast/Xfinity",
     color: "#CC0000",
-    isATT: false,
+    isHomeCarrier: false,
     plans: [
       {
         name: "Xfinity Unlimited Intro",
@@ -225,7 +225,7 @@ export const WIRELESS_PLANS = [
   {
     provider: "Charter/Spectrum",
     color: "#0072CE",
-    isATT: false,
+    isHomeCarrier: false,
     plans: [
       {
         name: "Spectrum Mobile Basic",
@@ -274,7 +274,7 @@ export const BROADBAND_PLANS = [
   {
     provider: "AT&T",
     color: "#00A8E0",
-    isATT: true,
+    isHomeCarrier: false,
     plans: [
       { name: "AT&T Internet 100", price: 55, speed: "100 Mbps", type: "Fiber/DSL", contract: "No contract", installation: "$99 or free", modem: "Included", uptime: "99.9%", badge: "Entry" },
       { name: "AT&T Internet 300", price: 65, speed: "300 Mbps", type: "Fiber", contract: "No contract", installation: "Free", modem: "Included", uptime: "99.9%", badge: "Popular" },
@@ -285,7 +285,7 @@ export const BROADBAND_PLANS = [
   {
     provider: "Comcast/Xfinity",
     color: "#CC0000",
-    isATT: false,
+    isHomeCarrier: false,
     plans: [
       { name: "Xfinity Connect", price: 30, speed: "75 Mbps", type: "Cable", contract: "12 months", installation: "$100", modem: "$15/mo rental", uptime: "99.5%", badge: "Entry" },
       { name: "Xfinity Fast", price: 55, speed: "400 Mbps", type: "Cable", contract: "12 months", installation: "$100", modem: "$15/mo rental", uptime: "99.5%", badge: "Popular" },
@@ -296,7 +296,7 @@ export const BROADBAND_PLANS = [
   {
     provider: "Charter/Spectrum",
     color: "#0072CE",
-    isATT: false,
+    isHomeCarrier: false,
     plans: [
       { name: "Spectrum Internet", price: 49, speed: "300 Mbps", type: "Cable", contract: "No contract", installation: "$49.99", modem: "Free", uptime: "99.5%", badge: "Entry" },
       { name: "Spectrum Internet Ultra", price: 69, speed: "500 Mbps", type: "Cable", contract: "No contract", installation: "$49.99", modem: "Free", uptime: "99.5%", badge: "Popular" },
@@ -306,7 +306,7 @@ export const BROADBAND_PLANS = [
   {
     provider: "Verizon",
     color: "#CD040B",
-    isATT: false,
+    isHomeCarrier: false,
     plans: [
       { name: "Verizon Fios 300 Mbps", price: 49, speed: "300 Mbps", type: "Fiber", contract: "No contract", installation: "$99 or free", modem: "Included", uptime: "99.9%", badge: "Entry" },
       { name: "Verizon Fios 500 Mbps", price: 69, speed: "500 Mbps", type: "Fiber", contract: "No contract", installation: "Free", modem: "Included", uptime: "99.9%", badge: "Popular" },
@@ -316,7 +316,7 @@ export const BROADBAND_PLANS = [
   {
     provider: "T-Mobile",
     color: "#E20074",
-    isATT: false,
+    isHomeCarrier: true,
     plans: [
       { name: "T-Mobile Home Internet", price: 50, speed: "87-245 Mbps avg", type: "Fixed Wireless 5G", contract: "No contract", installation: "Self-install free", modem: "Included", uptime: "98.5%", badge: "Wireless" },
       { name: "T-Mobile Business Internet", price: 60, speed: "87-415 Mbps avg", type: "Fixed Wireless 5G", contract: "No contract", installation: "Self-install free", modem: "Included", uptime: "99.0%", badge: "Business" },

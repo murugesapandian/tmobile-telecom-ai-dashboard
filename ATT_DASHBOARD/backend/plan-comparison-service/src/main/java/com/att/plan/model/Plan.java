@@ -25,5 +25,5 @@ public class Plan {
     private Boolean isRecommended;
     private String badge;
     private String perks;
-    private Boolean isAttPlan;
+    private Boolean isHomeCarrierPlan;
 }

@@ -58,6 +58,14 @@ spring:
           filters:
             - StripPrefix=0
 
+        # ── Swagger UI entrypoint — proxy from state-analytics-service ──
+        - id: swagger-ui-html
+          uri: http://localhost:8081
+          predicates:
+            - Path=/swagger-ui.html
+          filters:
+            - SetPath=/swagger-ui/index.html
+
         # ── Swagger UI static assets — proxy from state-analytics-service ──
         - id: swagger-ui-assets
           uri: http://localhost:8081

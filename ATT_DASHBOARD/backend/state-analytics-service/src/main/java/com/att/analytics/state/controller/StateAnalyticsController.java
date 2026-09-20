@@ -47,7 +47,7 @@ public class StateAnalyticsController {
     }
 
     @GetMapping("/opportunities")
-    @Operation(summary = "Get high AT&T growth opportunity states")
+    @Operation(summary = "Get high T-Mobile growth opportunity states")
     public ResponseEntity<List<StateData>> getOpportunityStates() {
         return ResponseEntity.ok(stateAnalyticsService.getHighOpportunityStates());
     }
@@ -58,11 +58,11 @@ public class StateAnalyticsController {
         return ResponseEntity.ok(stateAnalyticsService.getNationalSummary());
     }
 
-    @GetMapping("/top-att")
-    @Operation(summary = "Get top AT&T performing states")
-    public ResponseEntity<List<StateData>> getTopAttStates(
+    @GetMapping("/top-tmobile")
+    @Operation(summary = "Get top T-Mobile performing states")
+    public ResponseEntity<List<StateData>> getTopTMobileStates(
             @RequestParam(defaultValue = "10") int limit) {
-        return ResponseEntity.ok(stateAnalyticsService.getTopAttStates(limit));
+        return ResponseEntity.ok(stateAnalyticsService.getTopTMobileStates(limit));
     }
 
     @PutMapping("/{stateId}/share")

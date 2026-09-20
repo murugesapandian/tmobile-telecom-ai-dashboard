@@ -3,14 +3,14 @@ import logger, { CATEGORIES_LIST } from '../../services/LoggingService';
 
 const LEVEL_COLORS = {
   DEBUG: '#64748B',
-  INFO:  '#00A8E0',
+  INFO:  '#E20074',
   WARN:  '#F59E0B',
   ERROR: '#EF4444',
 };
 
 const LEVEL_BG = {
   DEBUG: 'rgba(100,116,139,0.12)',
-  INFO:  'rgba(0,168,224,0.12)',
+  INFO:  'rgba(226,0,116,0.12)',
   WARN:  'rgba(245,158,11,0.12)',
   ERROR: 'rgba(239,68,68,0.15)',
 };
@@ -64,7 +64,7 @@ export default function LogViewer() {
         onClick={() => { setOpen(o => !o); logger.click('LogViewer', 'TOGGLE', { opened: !open }); }}
         style={{
           position: 'fixed', bottom: 24, right: 24, zIndex: 9999,
-          background: open ? '#EF4444' : '#00A8E0',
+          background: open ? '#EF4444' : '#E20074',
           color: '#fff', border: 'none', borderRadius: 12,
           padding: '10px 18px', fontWeight: 700, fontSize: 13,
           cursor: 'pointer', boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
@@ -101,13 +101,13 @@ export default function LogViewer() {
             borderBottom: '1px solid #21262D',
             display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
           }}>
-            <span style={{ color: '#00A8E0', fontWeight: 700, fontSize: 14 }}>
-              AT&T Dashboard Logs
+            <span style={{ color: '#E20074', fontWeight: 700, fontSize: 14 }}>
+              T-Mobile Dashboard Logs
             </span>
             <div style={{ display: 'flex', gap: 6, marginLeft: 'auto' }}>
               {['LIVE', 'STATS'].map(t => (
                 <button key={t} onClick={() => setTab(t)} style={{
-                  background: tab === t ? '#00A8E0' : 'transparent',
+                  background: tab === t ? '#E20074' : 'transparent',
                   color: tab === t ? '#fff' : '#64748B',
                   border: '1px solid #21262D', borderRadius: 6,
                   padding: '3px 10px', fontSize: 11, cursor: 'pointer',
@@ -253,7 +253,7 @@ function LogRow({ log }) {
 function StatsPanel({ stats }) {
   return (
     <div style={{ flex: 1, overflowY: 'auto', padding: 16, fontSize: 12, color: '#94A3B8' }}>
-      <p style={{ color: '#00A8E0', fontWeight: 700, marginBottom: 12 }}>
+      <p style={{ color: '#E20074', fontWeight: 700, marginBottom: 12 }}>
         Session: {stats.sessionId}
       </p>
       <p style={{ marginBottom: 16 }}>Total events: <strong style={{ color: '#E2E8F0' }}>{stats.total}</strong></p>
@@ -282,7 +282,7 @@ function StatsPanel({ stats }) {
           <div key={cat} style={{ display: 'flex', gap: 10, marginBottom: 4 }}>
             <span style={{ width: 120, color: '#475569' }}>{cat}</span>
             <div style={{
-              height: 6, borderRadius: 3, background: '#00A8E0',
+              height: 6, borderRadius: 3, background: '#E20074',
               width: `${Math.min(100, (cnt / (stats.total || 1)) * 200)}%`,
               opacity: 0.5, alignSelf: 'center',
             }} />

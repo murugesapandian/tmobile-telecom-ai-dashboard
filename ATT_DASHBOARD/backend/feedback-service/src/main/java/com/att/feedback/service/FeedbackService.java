@@ -76,12 +76,11 @@ public class FeedbackService {
         );
     }
 
-    public List<Map<String, Object>> getAttImprovementAreas() {
+    public List<Map<String, Object>> getTmobileImprovementAreas() {
         return List.of(
-            Map.of("area", "Customer Service", "currentScore", 3.6, "targetScore", 4.0, "gap", 0.4, "priority", "Critical", "revenueImpact", "$2.1B"),
-            Map.of("area", "Pricing Transparency", "currentScore", 3.4, "targetScore", 3.9, "gap", 0.5, "priority", "High", "revenueImpact", "$1.8B"),
-            Map.of("area", "Value for Money", "currentScore", 3.5, "targetScore", 4.0, "gap", 0.5, "priority", "High", "revenueImpact", "$3.2B"),
-            Map.of("area", "Rural Network Quality", "currentScore", 3.8, "targetScore", 4.3, "gap", 0.5, "priority", "Medium", "revenueImpact", "$1.4B")
+            Map.of("area", "Coverage & Reliability (Rural)", "currentScore", 3.8, "targetScore", 4.3, "gap", 0.5, "priority", "Critical", "revenueImpact", "$1.6B"),
+            Map.of("area", "Customer Service", "currentScore", 3.9, "targetScore", 4.3, "gap", 0.4, "priority", "High", "revenueImpact", "$1.1B"),
+            Map.of("area", "App Experience", "currentScore", 4.1, "targetScore", 4.5, "gap", 0.4, "priority", "Medium", "revenueImpact", "$0.6B")
         );
     }
 }

@@ -15,7 +15,7 @@ import logger from './services/LoggingService';
 import './App.css';
 
 const PAGE_META = {
-  '/':              { title: 'Executive Overview',          subtitle: 'AT&T Business Intelligence Dashboard — Real-time Telecom Analytics' },
+  '/':              { title: 'Executive Overview',          subtitle: 'T-Mobile Business Intelligence Dashboard — Real-time Telecom Analytics' },
   '/usa-map':       { title: 'USA State Map',               subtitle: 'Interactive market share visualization across all 50 states' },
   '/provider-analytics': { title: 'Provider Analytics',    subtitle: 'State-by-state competitive analysis and trend data' },
   '/customer-feedback':  { title: 'Customer Feedback',     subtitle: 'Sentiment analysis and satisfaction scores — Top 5 providers' },

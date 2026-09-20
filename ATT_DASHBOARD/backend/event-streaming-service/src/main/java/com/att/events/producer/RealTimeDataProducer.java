@@ -23,7 +23,7 @@ public class RealTimeDataProducer {
 
     private static final String[] STATES = {"TX", "CA", "FL", "NY", "GA", "IL", "PA", "OH", "NC", "WA", "AZ", "CO", "TN", "LA", "VA"};
     private static final String[] ACTIONS = {"New subscriber", "Plan upgrade", "Fiber activation", "Port-in from Verizon", "5G migration", "Business account", "Bundle activation"};
-    private static final String[] SERVICES = {"AT&T Fiber", "AT&T 5G Premium", "AT&T Mobile Business", "AT&T FirstNet", "AT&T Entertainment"};
+    private static final String[] SERVICES = {"T-Mobile Home Internet", "T-Mobile 5G Premium", "T-Mobile Mobile Business", "T-Mobile Magenta Rewards", "T-Mobile Business"};
 
     @Scheduled(fixedRate = 2000)
     public void generateRealtimeActivity() {
@@ -35,8 +35,8 @@ public class RealTimeDataProducer {
         String action  = ACTIONS[random.nextInt(ACTIONS.length)];
         String service = SERVICES[random.nextInt(SERVICES.length)];
 
-        // DATA DISCLOSURE: these events are randomly generated — NOT real AT&T subscriber transactions
-        log.debug("[KAFKA-PRODUCE] [SIMULATED] topic=att.realtime.feed state={} action='{}' service='{}' sessions={} eventId={}",
+        // DATA DISCLOSURE: these events are randomly generated — NOT real T-Mobile subscriber transactions
+        log.debug("[KAFKA-PRODUCE] [SIMULATED] topic=tmo.realtime.feed state={} action='{}' service='{}' sessions={} eventId={}",
             state, action, service, activeSessions, eventId);
 
         Map<String, Object> event = new HashMap<>();
@@ -54,23 +54,23 @@ public class RealTimeDataProducer {
 
         try {
             String payload = objectMapper.writeValueAsString(event);
-            kafkaTemplate.send("att.realtime.feed", eventId, payload);
-            log.debug("[KAFKA-PRODUCE] Published to att.realtime.feed key={}", eventId);
+            kafkaTemplate.send("tmo.realtime.feed", eventId, payload);
+            log.debug("[KAFKA-PRODUCE] Published to tmo.realtime.feed key={}", eventId);
         } catch (Exception e) {
-            log.error("[KAFKA-PRODUCE] Failed to publish to att.realtime.feed: {}", e.getMessage());
+            log.error("[KAFKA-PRODUCE] Failed to publish to tmo.realtime.feed: {}", e.getMessage());
         }
     }
 
     @Scheduled(fixedRate = 30000)
     public void generateMarketShareUpdate() {
         String stateId = STATES[random.nextInt(STATES.length)];
-        double attChange = (random.nextDouble() - 0.5) * 2;
+        double tmobileChange = (random.nextDouble() - 0.5) * 2;
 
         Map<String, Object> event = new HashMap<>();
         event.put("type", "MARKET_SHARE_UPDATE");
         event.put("channel", "state_updates");
         event.put("stateId", stateId);
-        event.put("attShareDelta", String.format("%+.2f%%", attChange));
+        event.put("tmobileShareDelta", String.format("%+.2f%%", tmobileChange));
         event.put("timestamp", Instant.now().toString());
 
         webSocketHandler.broadcastToAll(event);

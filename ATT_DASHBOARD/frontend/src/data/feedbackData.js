@@ -187,41 +187,32 @@ export const FEEDBACK_CATEGORIES = [
   { key: "coverageReliability", label: "Coverage & Reliability", icon: "🗺️" },
 ];
 
-export const ATT_IMPROVEMENT_AREAS = [
+export const TMOBILE_IMPROVEMENT_AREAS = [
   {
-    area: "Customer Service",
-    currentScore: 3.6,
-    targetScore: 4.0,
-    gap: 0.4,
-    priority: "Critical",
-    action: "Reduce wait times, improve first-call resolution",
-    revenue_impact: "$2.1B",
-  },
-  {
-    area: "Pricing Transparency",
-    currentScore: 3.4,
-    targetScore: 3.9,
-    gap: 0.5,
-    priority: "High",
-    action: "Simplify billing, eliminate hidden fees",
-    revenue_impact: "$1.8B",
-  },
-  {
-    area: "Value for Money",
-    currentScore: 3.5,
-    targetScore: 4.0,
-    gap: 0.5,
-    priority: "High",
-    action: "Launch competitive mid-tier plans",
-    revenue_impact: "$3.2B",
-  },
-  {
-    area: "Network Quality (Rural)",
+    area: "Coverage & Reliability (Rural)",
     currentScore: 3.8,
     targetScore: 4.3,
     gap: 0.5,
+    priority: "Critical",
+    action: "Expand rural mid-band 5G towers and backhaul in underserved counties",
+    revenue_impact: "$1.6B",
+  },
+  {
+    area: "Customer Service",
+    currentScore: 3.9,
+    targetScore: 4.3,
+    gap: 0.4,
+    priority: "High",
+    action: "Expand Team of Experts coverage, reduce peak-hour wait times",
+    revenue_impact: "$1.1B",
+  },
+  {
+    area: "App Experience",
+    currentScore: 4.1,
+    targetScore: 4.5,
+    gap: 0.4,
     priority: "Medium",
-    action: "Expand rural 5G towers, FirstNet expansion",
-    revenue_impact: "$1.4B",
+    action: "Streamline account management and self-service troubleshooting flows",
+    revenue_impact: "$0.6B",
   },
 ];

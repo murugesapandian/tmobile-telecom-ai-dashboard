@@ -29,7 +29,7 @@ public class DashboardWebSocketHandler extends TextWebSocketHandler {
         try {
             Map<String, Object> welcomeMsg = Map.of(
                 "type", "CONNECTED",
-                "message", "Connected to AT&T Real-Time Dashboard",
+                "message", "Connected to T-Mobile Real-Time Dashboard",
                 "sessionId", session.getId(),
                 "timestamp", System.currentTimeMillis()
             );

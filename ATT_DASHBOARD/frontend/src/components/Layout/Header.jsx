@@ -65,10 +65,10 @@ const Header = ({ title, subtitle, lastUpdated, isLive, onToggleLive }) => {
       {/* Time */}
       <div style={{
         padding: '6px 14px', borderRadius: 20,
-        background: 'rgba(0,168,224,0.08)',
-        border: '1px solid rgba(0,168,224,0.2)',
+        background: 'rgba(226,0,116,0.08)',
+        border: '1px solid rgba(226,0,116,0.2)',
         fontSize: 12, fontFamily: 'JetBrains Mono, monospace',
-        color: '#00A8E0', fontWeight: 600, letterSpacing: '0.5px',
+        color: '#E20074', fontWeight: 600, letterSpacing: '0.5px',
       }}>
         {formatDate(now)}
       </div>
@@ -76,10 +76,10 @@ const Header = ({ title, subtitle, lastUpdated, isLive, onToggleLive }) => {
       {/* User avatar */}
       <div style={{
         width: 36, height: 36, borderRadius: '50%',
-        background: 'linear-gradient(135deg, #00A8E0, #0057A6)',
+        background: 'linear-gradient(135deg, #E20074, #9B004E)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontSize: 13, fontWeight: 700, color: '#fff', cursor: 'pointer',
-        boxShadow: '0 0 12px rgba(0,168,224,0.3)',
+        boxShadow: '0 0 12px rgba(226,0,116,0.3)',
       }}>
         PM
       </div>

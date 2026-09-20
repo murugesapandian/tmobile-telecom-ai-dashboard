@@ -10,12 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @OpenAPIDefinition(
     info = @Info(
-        title = "AT&T Customer Feedback & Sentiment API",
+        title = "T-Mobile Customer Feedback & Sentiment API",
         version = "1.0.0",
         description = "Customer satisfaction scores, NPS trends, and keyword-based sentiment analysis " +
                       "for the top 5 US telecom providers. " +
                       "NOTE: All scores are illustrative estimates — not from live VoC or JD Power feeds.",
-        contact = @Contact(name = "AT&T Business & Strategy Team", email = "murugesapandian@gmail.com")
+        contact = @Contact(name = "T-Mobile Business & Strategy Team", email = "murugesapandian@gmail.com")
     ),
     servers = {
         @Server(url = "http://localhost:8083", description = "Direct service"),

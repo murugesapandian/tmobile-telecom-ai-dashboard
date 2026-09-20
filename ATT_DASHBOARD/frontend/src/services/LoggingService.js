@@ -70,7 +70,7 @@ class LoggingService {
     this._ship(entry);
 
     // Also write to browser console with color coding
-    const colors = { INFO: '#00A8E0', WARN: '#F59E0B', ERROR: '#EF4444', DEBUG: '#64748B' };
+    const colors = { INFO: '#E20074', WARN: '#F59E0B', ERROR: '#EF4444', DEBUG: '#64748B' };
     const c = colors[entry.level] || '#94A3B8';
     console.log(
       `%c[${entry.level}] %c${entry.category}:${entry.action}`,

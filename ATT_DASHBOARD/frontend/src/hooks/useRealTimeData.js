@@ -40,7 +40,7 @@ export const useRealTimeData = (intervalMs = 3000) => {
     logger.info('REALTIME', 'MARKET_SHARE_FEED_INIT', {
       intervalMs,
       stateCount: STATE_PROVIDER_DATA.length,
-      note: 'SIMULATED: Math.random() noise applied to static base values — NOT live AT&T data',
+      note: 'SIMULATED: Math.random() noise applied to static base values — NOT live T-Mobile data',
     });
     if (!isLive) return;
     const timer = setInterval(tick, intervalMs);
@@ -52,30 +52,30 @@ export const useRealTimeData = (intervalMs = 3000) => {
 
 export const useKPIMetrics = () => {
   const [metrics, setMetrics] = useState({
-    totalSubscribers: 134500000,
-    attMarketShare:   27.2,
-    statesLeading:    18,
-    npsScore:         12,
-    revenueQ:         30.1,
-    fiberSubscribers: 8200000,
+    totalSubscribers: 129500000,
+    tmobileMarketShare: 24.1,
+    statesLeading:    10,
+    npsScore:         22,
+    revenueQ:         20.1,
+    homeInternetSubscribers: 6800000,
     networkUptime:    99.91,
-    churnRate:        1.02,
+    churnRate:        0.86,
   });
 
   useEffect(() => {
     logger.info('DATA_LOAD', 'KPI_METRICS_INIT', {
-      note: 'SIMULATED: Hardcoded baseline values with random drift — NOT from AT&T billing/BSS systems',
-      baselineSubscribers: 134500000,
-      baselineMarketShare: '27.2%',
+      note: 'SIMULATED: Hardcoded baseline values with random drift — NOT from T-Mobile billing/BSS systems',
+      baselineSubscribers: 129500000,
+      baselineMarketShare: '24.1%',
     });
     const timer = setInterval(() => {
       setMetrics(prev => ({
         ...prev,
         totalSubscribers: prev.totalSubscribers + Math.floor(Math.random() * 500 - 100),
-        attMarketShare:   Math.max(26, Math.min(28, prev.attMarketShare + (Math.random() - 0.5) * 0.05)),
+        tmobileMarketShare: Math.max(23, Math.min(25, prev.tmobileMarketShare + (Math.random() - 0.5) * 0.05)),
         networkUptime:    Math.max(99.8, Math.min(99.99, prev.networkUptime + (Math.random() - 0.5) * 0.01)),
-        churnRate:        Math.max(0.8, Math.min(1.3, prev.churnRate + (Math.random() - 0.5) * 0.02)),
-        fiberSubscribers: prev.fiberSubscribers + Math.floor(Math.random() * 200 - 50),
+        churnRate:        Math.max(0.7, Math.min(1.1, prev.churnRate + (Math.random() - 0.5) * 0.02)),
+        homeInternetSubscribers: prev.homeInternetSubscribers + Math.floor(Math.random() * 300 - 50),
       }));
     }, 2500);
     return () => clearInterval(timer);
@@ -87,8 +87,8 @@ export const useKPIMetrics = () => {
 export const useRealtimeSubscriberFeed = () => {
   const [feed, setFeed] = useState([]);
   const states    = ['TX', 'CA', 'FL', 'NY', 'GA', 'IL', 'PA', 'OH', 'NC', 'WA'];
-  const actions   = ['New subscriber', 'Plan upgrade', 'Fiber activation', 'Port-in', '5G migration'];
-  const providers = ['AT&T Fiber', 'AT&T 5G', 'AT&T Mobile', 'AT&T Business'];
+  const actions   = ['New subscriber', 'Plan upgrade', 'Home Internet activation', 'Port-in', '5G migration'];
+  const providers = ['T-Mobile Home Internet', 'T-Mobile 5G', 'T-Mobile Mobile', 'T-Mobile Business'];
 
   useEffect(() => {
     logger.info('DATA_LOAD', 'SUBSCRIBER_FEED_INIT', {

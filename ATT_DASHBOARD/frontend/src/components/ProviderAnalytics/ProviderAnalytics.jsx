@@ -51,8 +51,8 @@ const ProviderCard = ({ provider, isSelected, onClick }) => (
         border: `1px solid ${provider.color}40`, display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontSize: 10, fontWeight: 800, color: provider.color,
       }}>{provider.shortName.slice(0, 4)}</div>
-      {provider.isATT && (
-        <span style={{ fontSize: 9, fontWeight: 700, color: '#00A8E0', letterSpacing: '1px', background: 'rgba(0,168,224,0.12)', padding: '2px 6px', borderRadius: 4 }}>OUR CO.</span>
+      {provider.isHomeCarrier && (
+        <span style={{ fontSize: 9, fontWeight: 700, color: provider.color, letterSpacing: '1px', background: `${provider.color}20`, padding: '2px 6px', borderRadius: 4 }}>OUR CO.</span>
       )}
     </div>
     <div style={{ fontSize: 13, fontWeight: 700, color: '#E2E8F0', marginBottom: 4 }}>{provider.name}</div>
@@ -68,7 +68,7 @@ const ProviderCard = ({ provider, isSelected, onClick }) => (
 
 const ProviderAnalytics = ({ liveData }) => {
   const [selectedRegion, setSelectedRegion] = useState('All Regions');
-  const [selectedProviders, setSelectedProviders] = useState(['att', 'verizon', 'tmobile']);
+  const [selectedProviders, setSelectedProviders] = useState(['tmobile', 'verizon', 'att']);
   const [chartType, setChartType] = useState('bar');
   const [selectedProvider, setSelectedProvider] = useState(null);
 
@@ -112,8 +112,8 @@ const ProviderAnalytics = ({ liveData }) => {
     });
   };
 
-  const topAttStates = [...stateData].sort((a, b) => b.att - a.att).slice(0, 10);
-  const bottomAttStates = [...stateData].sort((a, b) => a.att - b.att).slice(0, 10);
+  const topTMobileStates = [...stateData].sort((a, b) => b.tmobile - a.tmobile).slice(0, 10);
+  const bottomTMobileStates = [...stateData].sort((a, b) => a.tmobile - b.tmobile).slice(0, 10);
 
   return (
     <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -159,9 +159,9 @@ const ProviderAnalytics = ({ liveData }) => {
             <button key={type} onClick={() => { setChartType(type); logger.click('ProviderAnalytics', 'CHART_TYPE', { type }); }}
               style={{
                 padding: '5px 12px', borderRadius: 6, cursor: 'pointer', fontSize: 11,
-                background: chartType === type ? 'rgba(0,168,224,0.15)' : 'transparent',
-                border: `1px solid ${chartType === type ? '#00A8E0' : '#1E2D45'}`,
-                color: chartType === type ? '#00A8E0' : '#64748B',
+                background: chartType === type ? 'rgba(226,0,116,0.15)' : 'transparent',
+                border: `1px solid ${chartType === type ? '#E20074' : '#1E2D45'}`,
+                color: chartType === type ? '#E20074' : '#64748B',
               }}>
               {type === 'bar' ? '▪ Bar' : '↗ Line'}
             </button>
@@ -206,40 +206,40 @@ const ProviderAnalytics = ({ liveData }) => {
 
       {/* Row: Top/Bottom States + Radar */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
-        {/* Top AT&T States */}
+        {/* Top T-Mobile States */}
         <div style={{ background: 'linear-gradient(145deg, #111C2E, #0D1526)', border: '1px solid #1E2D45', borderRadius: 16, padding: 20 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#E2E8F0', marginBottom: 4 }}>🏆 Top AT&T States</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: '#E2E8F0', marginBottom: 4 }}>🏆 Top T-Mobile States</div>
           <div style={{ fontSize: 11, color: '#64748B', marginBottom: 16 }}>Highest market penetration</div>
-          {topAttStates.map((s, i) => (
+          {topTMobileStates.map((s, i) => (
             <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-              <div style={{ width: 20, height: 20, borderRadius: 4, background: i < 3 ? 'rgba(0,168,224,0.2)' : 'rgba(255,255,255,0.04)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: i < 3 ? '#00A8E0' : '#64748B', fontWeight: 700, flexShrink: 0 }}>{i + 1}</div>
+              <div style={{ width: 20, height: 20, borderRadius: 4, background: i < 3 ? 'rgba(226,0,116,0.2)' : 'rgba(255,255,255,0.04)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: i < 3 ? '#E20074' : '#64748B', fontWeight: 700, flexShrink: 0 }}>{i + 1}</div>
               <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
                   <span style={{ fontSize: 12, color: '#E2E8F0' }}>{s.name}</span>
-                  <span style={{ fontSize: 12, color: '#00A8E0', fontWeight: 700 }}>{formatPercent(s.att)}</span>
+                  <span style={{ fontSize: 12, color: '#E20074', fontWeight: 700 }}>{formatPercent(s.tmobile)}</span>
                 </div>
                 <div style={{ height: 3, background: '#1E2D45', borderRadius: 2 }}>
-                  <div style={{ width: `${(s.att / 45) * 100}%`, height: '100%', background: '#00A8E0', borderRadius: 2 }} />
+                  <div style={{ width: `${(s.tmobile / 35) * 100}%`, height: '100%', background: '#E20074', borderRadius: 2 }} />
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom AT&T States (opportunities) */}
+        {/* Bottom T-Mobile States (opportunities) */}
         <div style={{ background: 'linear-gradient(145deg, #111C2E, #0D1526)', border: '1px solid #1E2D45', borderRadius: 16, padding: 20 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: '#E2E8F0', marginBottom: 4 }}>🎯 Growth Opportunity States</div>
-          <div style={{ fontSize: 11, color: '#64748B', marginBottom: 16 }}>Lowest AT&T market share</div>
-          {bottomAttStates.map((s, i) => (
+          <div style={{ fontSize: 11, color: '#64748B', marginBottom: 16 }}>Lowest T-Mobile market share</div>
+          {bottomTMobileStates.map((s, i) => (
             <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
               <div style={{ width: 20, height: 20, borderRadius: 4, background: 'rgba(239,68,68,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: '#EF4444', fontWeight: 700, flexShrink: 0 }}>{i + 1}</div>
               <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
                   <span style={{ fontSize: 12, color: '#E2E8F0' }}>{s.name}</span>
-                  <span style={{ fontSize: 12, color: '#EF4444', fontWeight: 700 }}>{formatPercent(s.att)}</span>
+                  <span style={{ fontSize: 12, color: '#EF4444', fontWeight: 700 }}>{formatPercent(s.tmobile)}</span>
                 </div>
                 <div style={{ height: 3, background: '#1E2D45', borderRadius: 2 }}>
-                  <div style={{ width: `${(s.att / 45) * 100}%`, height: '100%', background: '#EF4444', borderRadius: 2 }} />
+                  <div style={{ width: `${(s.tmobile / 35) * 100}%`, height: '100%', background: '#EF4444', borderRadius: 2 }} />
                 </div>
               </div>
             </div>
@@ -249,14 +249,14 @@ const ProviderAnalytics = ({ liveData }) => {
         {/* Radar chart */}
         <div style={{ background: 'linear-gradient(145deg, #111C2E, #0D1526)', border: '1px solid #1E2D45', borderRadius: 16, padding: 20 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: '#E2E8F0', marginBottom: 4 }}>Competitive Radar</div>
-          <div style={{ fontSize: 11, color: '#64748B', marginBottom: 12 }}>AT&T vs Competitors (score/100)</div>
+          <div style={{ fontSize: 11, color: '#64748B', marginBottom: 12 }}>T-Mobile vs Competitors (score/100)</div>
           <ResponsiveContainer width="100%" height={230}>
             <RadarChart data={radarData}>
               <PolarGrid stroke="#1E2D45" />
               <PolarAngleAxis dataKey="subject" tick={{ fill: '#64748B', fontSize: 10 }} />
-              <Radar name="AT&T" dataKey="att" stroke="#00A8E0" fill="#00A8E0" fillOpacity={0.15} strokeWidth={2} />
+              <Radar name="T-Mobile" dataKey="tmobile" stroke="#E20074" fill="#E20074" fillOpacity={0.15} strokeWidth={2} />
               <Radar name="Verizon" dataKey="verizon" stroke="#CD040B" fill="#CD040B" fillOpacity={0.1} strokeWidth={1.5} />
-              <Radar name="T-Mobile" dataKey="tmobile" stroke="#E20074" fill="#E20074" fillOpacity={0.1} strokeWidth={1.5} />
+              <Radar name="AT&T" dataKey="att" stroke="#00A8E0" fill="#00A8E0" fillOpacity={0.1} strokeWidth={1.5} />
               <Legend wrapperStyle={{ fontSize: 10, color: '#94A3B8' }} />
               <Tooltip contentStyle={{ background: '#0D1526', border: '1px solid #1E2D45', borderRadius: 8, fontSize: 12 }} />
             </RadarChart>
@@ -265,13 +265,13 @@ const ProviderAnalytics = ({ liveData }) => {
       </div>
 
       {/* National averages summary */}
-      <div style={{ background: 'linear-gradient(145deg, #111C2E, #0D1526)', border: '1px solid #00A8E030', borderRadius: 16, padding: 20 }}>
+      <div style={{ background: 'linear-gradient(145deg, #111C2E, #0D1526)', border: '1px solid #E2007430', borderRadius: 16, padding: 20 }}>
         <div style={{ fontSize: 14, fontWeight: 700, color: '#E2E8F0', marginBottom: 16 }}>National Average Market Share (All 51 States + DC)</div>
         <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
           {[
-            { label: 'AT&T', value: nationalAvg.att, color: '#00A8E0' },
-            { label: 'Verizon', value: nationalAvg.verizon, color: '#CD040B' },
             { label: 'T-Mobile', value: nationalAvg.tmobile, color: '#E20074' },
+            { label: 'Verizon', value: nationalAvg.verizon, color: '#CD040B' },
+            { label: 'AT&T', value: nationalAvg.att, color: '#00A8E0' },
             { label: 'Comcast', value: nationalAvg.comcast, color: '#CC0000' },
             { label: 'Spectrum', value: nationalAvg.spectrum, color: '#0072CE' },
             { label: 'Cox', value: nationalAvg.cox, color: '#00897B' },

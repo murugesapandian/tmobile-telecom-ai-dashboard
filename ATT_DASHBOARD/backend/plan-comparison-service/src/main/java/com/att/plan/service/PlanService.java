@@ -24,12 +24,12 @@ public class PlanService {
         return comparison;
     }
 
-    public Map<String, Object> getAttCompetitiveAnalysis() {
-        List<Plan> attPlans = planRepository.findByProvider("AT&T");
+    public Map<String, Object> getTmobileCompetitiveAnalysis() {
+        List<Plan> tmobilePlans = planRepository.findByProvider("T-Mobile");
         List<Plan> allPlans = planRepository.findAll();
         Map<String, Object> analysis = new HashMap<>();
-        analysis.put("attPlans", attPlans);
-        analysis.put("avgAttPrice", attPlans.stream().mapToDouble(Plan::getMonthlyPrice).average().orElse(0));
+        analysis.put("tmobilePlans", tmobilePlans);
+        analysis.put("avgTmobilePrice", tmobilePlans.stream().mapToDouble(Plan::getMonthlyPrice).average().orElse(0));
         analysis.put("avgMarketPrice", allPlans.stream().mapToDouble(Plan::getMonthlyPrice).average().orElse(0));
         return analysis;
     }

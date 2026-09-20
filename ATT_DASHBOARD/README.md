@@ -1,8 +1,8 @@
-# AT&T Telecom Intelligence Dashboard
+# T-Mobile Telecom Intelligence Dashboard
 
 ## Advanced Business & Strategy Analytics Platform
 
-A real-time telecom market intelligence dashboard for AT&T's Business & Strategy team, enabling data-driven decisions for market expansion, customer experience improvement, and competitive positioning across all 50 US states.
+A real-time telecom market intelligence dashboard for T-Mobile's Business & Strategy team, enabling data-driven decisions for market expansion, customer experience improvement, and competitive positioning across all 50 US states.
 
 ---
 
@@ -66,7 +66,7 @@ docker-compose up -d    # Starts all services + Kafka + Zookeeper
 ## Key Features
 
 - **Real-time data**: Market share updates every 3 seconds
-- **Interactive US Map**: 3 view modes (Leader, AT&T Heat Map, Opportunity)
+- **Interactive US Map**: 3 view modes (Leader, T-Mobile Heat Map, Opportunity)
 - **50 States**: Complete state-by-state telecom market data
 - **10 Providers**: AT&T, Verizon, T-Mobile, Comcast, Charter, Cox, Dish, UScellular, Frontier, Lumen
 - **Customer Feedback**: Sentiment analysis, NPS scores, improvement roadmap
@@ -85,4 +85,4 @@ docker-compose up -d    # Starts all services + Kafka + Zookeeper
 
 ---
 
-*Built for AT&T Business & Strategy Team | Senior Product Manager Dashboard*
+*Built for T-Mobile Business & Strategy Team | Senior Product Manager Dashboard*

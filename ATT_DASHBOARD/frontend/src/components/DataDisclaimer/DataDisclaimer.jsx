@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logger from '../../services/LoggingService';
 
-const SECTION = ({ title, children, color = '#00A8E0', icon }) => (
+const SECTION = ({ title, children, color = '#E20074', icon }) => (
   <div style={{
     background: 'rgba(255,255,255,0.03)',
     border: `1px solid ${color}30`,
@@ -64,7 +64,7 @@ export default function DataDisclaimer() {
           <p style={{ color: '#94A3B8', margin: 0, lineHeight: 1.7, fontSize: 14 }}>
             This dashboard is a <strong style={{ color: '#E2E8F0' }}>proof-of-concept prototype</strong> built
             for strategic demonstration purposes. <strong style={{ color: '#FF6B00' }}>No data shown here
-            is sourced from AT&T internal systems, live APIs, or verified market intelligence feeds.</strong>{' '}
+            is sourced from T-Mobile internal systems, live APIs, or verified market intelligence feeds.</strong>{' '}
             All market share figures, customer feedback scores, NPS values, plan prices, and real-time activity
             events are <strong style={{ color: '#E2E8F0' }}>illustrative estimates or algorithmically
             simulated values</strong>. They are intended to demonstrate product vision and dashboard capabilities,
@@ -77,20 +77,20 @@ export default function DataDisclaimer() {
 
         {/* Left column */}
         <div>
-          <SECTION title="Market Share Data (50 States)" icon="🗺️" color="#00A8E0">
+          <SECTION title="Market Share Data (50 States)" icon="🗺️" color="#E20074">
             <Row label="Source file"         value="src/data/stateProviderData.js" badge="SIMULATED" />
-            <Row label="Data origin"         value="Manually estimated percentages based on general public knowledge, analyst reports (OpenSignal, Ookla), and FCC broadband deployment maps as of early 2025. Not derived from AT&T internal CRM or billing data." />
+            <Row label="Data origin"         value="Manually estimated percentages based on general public knowledge, analyst reports (OpenSignal, Ookla), and FCC broadband deployment maps as of early 2025. Not derived from T-Mobile internal CRM or billing data." />
             <Row label="Update frequency"    value="Static base values refreshed every 3 seconds with ±0.8% random noise (Math.random() in useRealTimeData.js)" badge="RANDOM NOISE" />
             <Row label="Coverage"            value="All 50 US states + Washington D.C." badge="COMPLETE" badgeColor="#22C55E" />
-            <Row label="For production"      value="AT&T internal BI systems, FCC Broadband Data Collection API, CTIA Wireless Industry Statistics" />
+            <Row label="For production"      value="T-Mobile internal BI systems, FCC Broadband Data Collection API, CTIA Wireless Industry Statistics" />
           </SECTION>
 
           <SECTION title="Real-Time Activity Feed" icon="⚡" color="#FF6B00">
             <Row label="Source hook"         value="src/hooks/useRealTimeData.js — useRealtimeSubscriberFeed()" badge="FAKE EVENTS" />
             <Row label="Mechanism"           value="setInterval firing every 1,800ms generates random subscriber events from hardcoded arrays of city names, plan types, and event types (signup, churn, upgrade, issue)." />
-            <Row label="Events are real?"    value="NO. Every 'New signup in Dallas' or 'Fiber upgrade in Atlanta' is a randomly composed string. No actual subscriber transactions." badge="NOT REAL" />
+            <Row label="Events are real?"    value="NO. Every 'New signup in Dallas' or 'Home Internet activation in Atlanta' is a randomly composed string. No actual subscriber transactions." badge="NOT REAL" />
             <Row label="KPI metrics"         value="Total subscribers, revenue, data usage, and satisfaction scores are hardcoded baseline values with ±random drift applied on each 2,500ms tick." />
-            <Row label="For production"      value="AT&T OSS/BSS event streams via Kafka, subscriber management APIs (SMAPI), revenue assurance systems" />
+            <Row label="For production"      value="T-Mobile OSS/BSS event streams via Kafka, subscriber management APIs, revenue assurance systems" />
           </SECTION>
         </div>
 
@@ -98,18 +98,18 @@ export default function DataDisclaimer() {
         <div>
           <SECTION title="Customer Feedback & NPS" icon="💬" color="#8B5CF6">
             <Row label="Source file"         value="src/data/feedbackData.js" badge="ILLUSTRATIVE" />
-            <Row label="NPS scores"          value="Illustrative values based on publicly reported J.D. Power rankings and Consumer Reports surveys (not real AT&T survey data)" />
+            <Row label="NPS scores"          value="Illustrative values based on publicly reported J.D. Power rankings and Consumer Reports surveys (not real T-Mobile survey data)" />
             <Row label="Sentiment analysis"  value="Backend SentimentAnalysisService.java uses a hardcoded keyword map (NOT an ML model, NOT trained on real reviews)" />
             <Row label="Trend data"          value="Monthly trend lines are linear interpolations from manually set start/end points with added noise" />
             <Row label="Feedback volume"     value="Hardcoded counts (e.g., '52,341 reviews') — not connected to any review platform (Trustpilot, App Store, Google Play)" />
-            <Row label="For production"      value="AT&T VoC (Voice of Customer) platform, Qualtrics NPS feeds, Google Play / App Store review APIs, Medallia integration" />
+            <Row label="For production"      value="T-Mobile VoC (Voice of Customer) platform, Qualtrics NPS feeds, Google Play / App Store review APIs, Medallia integration" />
           </SECTION>
 
           <SECTION title="Plan Pricing Data" icon="💰" color="#22C55E">
             <Row label="Source file"         value="src/data/planData.js" badge="STATIC" badgeColor="#F59E0B" />
-            <Row label="Data origin"         value="Publicly available pricing from provider websites (att.com, verizon.com, t-mobile.com, comcast.com, spectrum.com) as of knowledge cutoff (early 2025). Prices change frequently." />
-            <Row label="Live pricing?"       value="NO. Prices are hardcoded. No connections to AT&T OPUS pricing engine or competitor scraping." badge="NOT LIVE" />
-            <Row label="For production"      value="AT&T Product Catalog API (OPUS), competitor price monitoring services (Crayon, Klue), public FCC broadband availability maps" />
+            <Row label="Data origin"         value="Publicly available pricing from provider websites (t-mobile.com, verizon.com, att.com, comcast.com, spectrum.com) as of knowledge cutoff (early 2025). Prices change frequently." />
+            <Row label="Live pricing?"       value="NO. Prices are hardcoded. No connections to a live T-Mobile pricing engine or competitor scraping." badge="NOT LIVE" />
+            <Row label="For production"      value="T-Mobile Product Catalog API, competitor price monitoring services (Crayon, Klue), public FCC broadband availability maps" />
           </SECTION>
 
           <SECTION title="What IS Real" icon="✅" color="#22C55E">
@@ -123,7 +123,7 @@ export default function DataDisclaimer() {
       </div>
 
       {/* Architecture pipeline */}
-      <SECTION title="Data Pipeline: Current vs. Production Vision" icon="🏗️" color="#00A8E0">
+      <SECTION title="Data Pipeline: Current vs. Production Vision" icon="🏗️" color="#E20074">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
           <div>
             <p style={{ color: '#64748B', fontWeight: 700, fontSize: 12, marginBottom: 12, letterSpacing: 1 }}>
@@ -145,18 +145,18 @@ export default function DataDisclaimer() {
               PRODUCTION TARGET
             </p>
             <div style={{ fontFamily: 'monospace', fontSize: 12, color: '#64748B', lineHeight: 2 }}>
-              <div style={{ color: '#22C55E' }}>AT&T OSS/BSS  →  Kafka topics</div>
-              <div>  ├── att.subscriber.events (real-time signups/churns)</div>
-              <div>  ├── att.revenue.stream (billing events)</div>
-              <div>  └── att.network.metrics (usage/performance)</div>
+              <div style={{ color: '#22C55E' }}>T-Mobile OSS/BSS  →  Kafka topics</div>
+              <div>  ├── tmo.subscriber.events (real-time signups/churns)</div>
+              <div>  ├── tmo.revenue.stream (billing events)</div>
+              <div>  └── tmo.network.metrics (usage/performance)</div>
               <div></div>
               <div style={{ color: '#22C55E' }}>event-streaming-service  →  WebSocket</div>
               <div>  └── React Dashboard (live push, no polling)</div>
               <div></div>
               <div style={{ color: '#22C55E' }}>External APIs</div>
               <div>  ├── FCC Broadband Data Collection API</div>
-              <div>  ├── AT&T VoC / Qualtrics NPS feed</div>
-              <div>  └── AT&T Product Catalog API (OPUS)</div>
+              <div>  ├── T-Mobile VoC / Qualtrics NPS feed</div>
+              <div>  └── T-Mobile Product Catalog API</div>
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@ export default function DataDisclaimer() {
         textAlign: 'center', padding: '20px 0 0',
         color: '#334155', fontSize: 12,
       }}>
-        Last reviewed: June 2026 · AT&T Business & Strategy Team · Internal Prototype v1.0
+        Last reviewed: June 2026 · T-Mobile Business & Strategy Team · Internal Prototype v1.0
       </div>
     </div>
   );

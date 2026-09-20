@@ -23,5 +23,5 @@ public class PlanController {
     @GetMapping("/broadband") public ResponseEntity<List<Plan>> getBroadbandPlans() { return ResponseEntity.ok(planService.getPlansByType("broadband")); }
     @GetMapping("/provider/{provider}") public ResponseEntity<List<Plan>> getByProvider(@PathVariable String provider) { return ResponseEntity.ok(planService.getPlansByProvider(provider)); }
     @GetMapping("/compare") public ResponseEntity<Map<String, Object>> comparePlans(@RequestParam List<Long> planIds) { return ResponseEntity.ok(planService.comparePlans(planIds)); }
-    @GetMapping("/att/competitive-analysis") public ResponseEntity<Map<String, Object>> getAttCompetitiveAnalysis() { return ResponseEntity.ok(planService.getAttCompetitiveAnalysis()); }
+    @GetMapping("/tmobile/competitive-analysis") public ResponseEntity<Map<String, Object>> getTmobileCompetitiveAnalysis() { return ResponseEntity.ok(planService.getTmobileCompetitiveAnalysis()); }
 }

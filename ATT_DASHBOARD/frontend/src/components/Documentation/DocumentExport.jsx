@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 const Section = ({ title, children, highlight }) => (
   <div style={{
     background: highlight ? 'linear-gradient(145deg, #0D1E30, #091628)' : 'linear-gradient(145deg, #111C2E, #0D1526)',
-    border: `1px solid ${highlight ? '#00A8E050' : '#1E2D45'}`, borderRadius: 14, padding: 24, marginBottom: 16,
+    border: `1px solid ${highlight ? '#E2007450' : '#1E2D45'}`, borderRadius: 14, padding: 24, marginBottom: 16,
   }}>
-    <div style={{ fontSize: 15, fontWeight: 700, color: highlight ? '#00A8E0' : '#E2E8F0', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
+    <div style={{ fontSize: 15, fontWeight: 700, color: highlight ? '#E20074' : '#E2E8F0', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
       {title}
     </div>
     {children}
@@ -36,16 +36,16 @@ const DocumentExport = () => {
         sections: [{
           properties: {},
           children: [
-            new Paragraph({ text: 'AT&T Telecom Intelligence Dashboard', heading: HeadingLevel.TITLE, alignment: AlignmentType.CENTER }),
+            new Paragraph({ text: 'T-Mobile Telecom Intelligence Dashboard', heading: HeadingLevel.TITLE, alignment: AlignmentType.CENTER }),
             new Paragraph({ text: 'Technical Architecture & Business Case Document', heading: HeadingLevel.HEADING_1, alignment: AlignmentType.CENTER }),
-            new Paragraph({ text: 'Prepared by: AT&T Business & Strategy Team | Version: 1.0 | June 2026', alignment: AlignmentType.CENTER, spacing: { after: 400 } }),
+            new Paragraph({ text: 'Prepared by: T-Mobile Business & Strategy Team | Version: 1.0 | June 2026', alignment: AlignmentType.CENTER, spacing: { after: 400 } }),
 
             new Paragraph({ text: '1. Executive Summary', heading: HeadingLevel.HEADING_1 }),
-            new Paragraph({ text: 'This document describes the AT&T Telecom Intelligence Dashboard — a real-time business analytics platform designed to provide AT&T\'s Business & Strategy team with actionable insights about telecom market share across all 50 US states, customer feedback sentiment, plan competitive analysis, and strategic opportunity identification.', spacing: { after: 200 } }),
+            new Paragraph({ text: 'This document describes the T-Mobile Telecom Intelligence Dashboard — a real-time business analytics platform designed to provide T-Mobile\'s Business & Strategy team with actionable insights about telecom market share across all 50 US states, customer feedback sentiment, plan competitive analysis, and strategic opportunity identification.', spacing: { after: 200 } }),
 
             new Paragraph({ text: '2. Business Context & Objectives', heading: HeadingLevel.HEADING_1 }),
-            new Paragraph({ text: 'AT&T operates in a highly competitive US telecom market with three primary national competitors: Verizon (28.4% wireless share), AT&T (27.2%), and T-Mobile (24.1%). The dashboard addresses these strategic objectives:', spacing: { after: 100 } }),
-            ...['• Identify US states where AT&T has growth opportunities', '• Track real-time market share changes by provider and geography', '• Monitor customer satisfaction vs. competitors (NPS, sentiment analysis)', '• Compare service plans across all major providers', '• Enable data-driven decision making for the strategy team'].map(t => new Paragraph({ text: t, spacing: { after: 80 } })),
+            new Paragraph({ text: 'T-Mobile operates in a highly competitive US telecom market with two primary national competitors: Verizon (28.4% wireless share) and AT&T (27.2%), against T-Mobile\'s own 24.1% share. The dashboard addresses these strategic objectives:', spacing: { after: 100 } }),
+            ...['• Identify US states where T-Mobile has growth opportunities', '• Track real-time market share changes by provider and geography', '• Monitor customer satisfaction vs. competitors (NPS, sentiment analysis)', '• Compare service plans across all major providers', '• Enable data-driven decision making for the strategy team'].map(t => new Paragraph({ text: t, spacing: { after: 80 } })),
 
             new Paragraph({ text: '3. System Architecture Overview', heading: HeadingLevel.HEADING_1 }),
             new Paragraph({ text: 'The platform follows a microservices architecture with event-driven communication via Apache Kafka. It comprises 6 backend Spring Boot microservices, a React.js frontend, and SQLite databases per service.', spacing: { after: 200 } }),
@@ -74,22 +74,22 @@ const DocumentExport = () => {
 
             new Paragraph({ text: '6. Event-Driven Architecture (Kafka)', heading: HeadingLevel.HEADING_1 }),
             new Paragraph({ text: 'The platform uses Apache Kafka for async event-driven communication between microservices. Key Kafka topics:', spacing: { after: 100 } }),
-            ...['• att.state.data.updates — State market share change events (produced by State Analytics Service)', '• att.provider.updates — Provider metrics updates (produced by Provider Service)', '• att.feedback.aggregated — Aggregated sentiment events (produced by Feedback Service)', '• att.plan.updates — Plan catalog change events (produced by Plan Comparison Service)', '• att.realtime.feed — Live subscriber activity events (consumed by Event Streaming Service → WebSocket)'].map(t => new Paragraph({ text: t, spacing: { after: 80 } })),
+            ...['• tmo.state.data.updates — State market share change events (produced by State Analytics Service)', '• tmo.provider.updates — Provider metrics updates (produced by Provider Service)', '• tmo.feedback.aggregated — Aggregated sentiment events (produced by Feedback Service)', '• tmo.plan.updates — Plan catalog change events (produced by Plan Comparison Service)', '• tmo.realtime.feed — Live subscriber activity events (consumed by Event Streaming Service → WebSocket)'].map(t => new Paragraph({ text: t, spacing: { after: 80 } })),
 
             new Paragraph({ text: '7. Database Design (SQLite)', heading: HeadingLevel.HEADING_1 }),
             new Paragraph({ text: 'Each microservice uses its own embedded SQLite database (database-per-service pattern), ensuring loose coupling. Key tables:', spacing: { after: 100 } }),
             ...['• state_analytics.db: states, state_provider_share, state_trends', '• provider.db: providers, provider_metrics, coverage_data', '• feedback.db: feedback_entries, sentiment_scores, nps_records', '• plan_comparison.db: plans, plan_features, plan_pricing', '• events.db: event_log, websocket_sessions'].map(t => new Paragraph({ text: t, spacing: { after: 80 } })),
 
             new Paragraph({ text: '8. Dashboard Features', heading: HeadingLevel.HEADING_1 }),
-            ...['1. Overview Dashboard — 8 real-time KPI cards, revenue trend, market share pie chart, regional breakdown, live activity feed', '2. USA State Map — Interactive choropleth map with 3 view modes (Leader, AT&T Share, Opportunity), click-to-drill-down, state detail panel with full provider breakdown', '3. Provider Analytics — State-by-state bar/line charts, top/bottom AT&T states, competitive radar chart, national average summary', '4. Customer Feedback — Top 5 provider rankings with sentiment analysis, NPS comparison, 12-month satisfaction trends, AT&T strategic opportunities with revenue impact', '5. Plan Comparison — Wireless + broadband plan cards, sortable comparison table, price chart, AT&T vs competitor analysis'].map(t => new Paragraph({ text: t, spacing: { after: 100 } })),
+            ...['1. Overview Dashboard — 8 real-time KPI cards, revenue trend, market share pie chart, regional breakdown, live activity feed', '2. USA State Map — Interactive choropleth map with 3 view modes (Leader, T-Mobile Share, Opportunity), click-to-drill-down, state detail panel with full provider breakdown', '3. Provider Analytics — State-by-state bar/line charts, top/bottom T-Mobile states, competitive radar chart, national average summary', '4. Customer Feedback — Top 5 provider rankings with sentiment analysis, NPS comparison, 12-month satisfaction trends, T-Mobile strategic opportunities with revenue impact', '5. Plan Comparison — Wireless + broadband plan cards, sortable comparison table, price chart, T-Mobile vs competitor analysis'].map(t => new Paragraph({ text: t, spacing: { after: 100 } })),
 
             new Paragraph({ text: '9. Business Cases & Strategic Value', heading: HeadingLevel.HEADING_1 }),
             new Paragraph({ text: '9.1 Market Opportunity Identification', heading: HeadingLevel.HEADING_2 }),
-            new Paragraph({ text: 'AT&T currently leads in 18 of 51 states. The dashboard identifies 28 high-opportunity states (Northeast, Pacific Northwest, Mountain West) where AT&T\'s market share is below 20%. Winning 5% more share in these states represents $12.5B+ annual revenue opportunity.', spacing: { after: 200 } }),
+            new Paragraph({ text: 'T-Mobile currently leads in 10 of 51 states. The dashboard identifies 14 high-opportunity states (Southeast, South, and parts of the Mid-Atlantic) where T-Mobile\'s market share is below 19%. Winning 5% more share in these states represents $9.8B+ annual revenue opportunity.', spacing: { after: 200 } }),
             new Paragraph({ text: '9.2 Customer Experience Improvement', heading: HeadingLevel.HEADING_2 }),
-            new Paragraph({ text: 'AT&T\'s NPS of 12 trails T-Mobile (22) and Verizon (18). The feedback analysis identifies 4 critical areas: Customer Service (+$2.1B impact), Pricing Transparency (+$1.8B), Value for Money (+$3.2B), Rural Network Quality (+$1.4B). Total potential: $8.5B annual revenue.', spacing: { after: 200 } }),
+            new Paragraph({ text: 'T-Mobile already leads the market on NPS (22) ahead of Verizon (18) and AT&T (12). The feedback analysis identifies 3 remaining priority areas to widen that lead: Coverage & Reliability in rural markets (+$1.6B impact), Customer Service (+$1.1B), App Experience (+$0.6B). Total potential: $3.3B annual revenue.', spacing: { after: 200 } }),
             new Paragraph({ text: '9.3 Plan Competitiveness', heading: HeadingLevel.HEADING_2 }),
-            new Paragraph({ text: 'AT&T\'s wireless plans are priced $5-15/mo above T-Mobile equivalents. Introducing a competitive mid-tier plan ($65/mo with 50GB premium data) could capture 2M additional subscribers over 18 months.', spacing: { after: 200 } }),
+            new Paragraph({ text: 'T-Mobile\'s wireless plans are already priced $5-15/mo below AT&T equivalents at comparable tiers, and T-Mobile leads on customer-reported value for money. Growing T-Mobile Home Internet penetration in AT&T Fiber-heavy metros represents a complementary $2M+ subscriber opportunity over 18 months.', spacing: { after: 200 } }),
 
             new Paragraph({ text: '10. Deployment Architecture', heading: HeadingLevel.HEADING_1 }),
             new Paragraph({ text: 'The application is fully containerized with Docker Compose for local development and can be deployed on any cloud provider (AWS, GCP, Azure) or on-premise Linux server. The React frontend is an OS-independent web application accessible from any modern browser on any platform.', spacing: { after: 200 } }),
@@ -100,15 +100,15 @@ const DocumentExport = () => {
             ...['• JWT-based authentication via Spring Security on all API endpoints', '• HTTPS enforced in production via NGINX SSL termination', '• Kafka SASL/TLS encryption for message security', '• Input validation and SQL injection prevention via JPA parameterized queries', '• CORS policies configured at API Gateway', '• Role-based access control (RBAC): Admin, Analyst, Viewer roles'].map(t => new Paragraph({ text: t, spacing: { after: 80 } })),
 
             new Paragraph({ text: '12. Future Roadmap', heading: HeadingLevel.HEADING_1 }),
-            ...['• Phase 2: ML-based churn prediction using subscriber behavior data', '• Phase 3: Real-time social media sentiment integration (Twitter/X, Reddit)', '• Phase 4: AI-powered pricing recommendation engine', '• Phase 5: Mobile app version (React Native)', '• Phase 6: Integration with AT&T internal CRM and BI systems'].map(t => new Paragraph({ text: t, spacing: { after: 80 } })),
+            ...['• Phase 2: ML-based churn prediction using subscriber behavior data', '• Phase 3: Real-time social media sentiment integration (Twitter/X, Reddit)', '• Phase 4: AI-powered pricing recommendation engine', '• Phase 5: Mobile app version (React Native)', '• Phase 6: Integration with T-Mobile internal CRM and BI systems'].map(t => new Paragraph({ text: t, spacing: { after: 80 } })),
 
-            new Paragraph({ text: 'Document End — AT&T Telecom Intelligence Dashboard v1.0', alignment: AlignmentType.CENTER, spacing: { before: 400 } }),
+            new Paragraph({ text: 'Document End — T-Mobile Telecom Intelligence Dashboard v1.0', alignment: AlignmentType.CENTER, spacing: { before: 400 } }),
           ],
         }],
       });
 
       const blob = await Packer.toBlob(doc);
-      saveAs(blob, 'ATT_Telecom_Intelligence_Dashboard_Architecture.docx');
+      saveAs(blob, 'TMobile_Telecom_Intelligence_Dashboard_Architecture.docx');
       setDownloaded(true);
       setTimeout(() => setDownloaded(false), 4000);
     } catch (err) {
@@ -120,7 +120,7 @@ const DocumentExport = () => {
 
   const ARCH_DIAGRAM = `
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    AT&T TELECOM INTELLIGENCE DASHBOARD                       │
+│                  T-MOBILE TELECOM INTELLIGENCE DASHBOARD                     │
 │                         Technical Architecture                               │
 └─────────────────────────────────────────────────────────────────────────────┘
 
@@ -152,11 +152,11 @@ const DocumentExport = () => {
               │   Apache Kafka :9092   │◄───────────┘
               │  ┌──────────────────┐  │
               │  │ Topics:          │  │
-              │  │ att.state.updates│  │
-              │  │ att.provider.data│  │
-              │  │ att.feedback.agg │  │
-              │  │ att.plan.updates │  │
-              │  │ att.realtime.feed│  │
+              │  │ tmo.state.updates│  │
+              │  │ tmo.provider.data│  │
+              │  │ tmo.feedback.agg │  │
+              │  │ tmo.plan.updates │  │
+              │  │ tmo.realtime.feed│  │
               │  └──────────────────┘  │
               └────────────────────────┘
                            │
@@ -181,7 +181,7 @@ const DocumentExport = () => {
       {/* Download button */}
       <div style={{
         background: 'linear-gradient(145deg, #0D1E30, #091628)',
-        border: '1px solid #00A8E050', borderRadius: 16, padding: 24,
+        border: '1px solid #E2007450', borderRadius: 16, padding: 24,
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       }}>
         <div>
@@ -197,9 +197,9 @@ const DocumentExport = () => {
           disabled={isGenerating}
           style={{
             padding: '12px 28px', borderRadius: 12, cursor: isGenerating ? 'not-allowed' : 'pointer',
-            background: downloaded ? 'linear-gradient(135deg, #10B981, #059669)' : 'linear-gradient(135deg, #00A8E0, #0057A6)',
+            background: downloaded ? 'linear-gradient(135deg, #10B981, #059669)' : 'linear-gradient(135deg, #E20074, #9B004E)',
             border: 'none', color: '#fff', fontSize: 14, fontWeight: 700,
-            boxShadow: '0 4px 20px rgba(0,168,224,0.3)', opacity: isGenerating ? 0.7 : 1,
+            boxShadow: '0 4px 20px rgba(226,0,116,0.3)', opacity: isGenerating ? 0.7 : 1,
             transition: 'all 0.2s', minWidth: 200,
           }}
         >
@@ -216,12 +216,12 @@ const DocumentExport = () => {
       <Section title="📊 Business Case Summary">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#00A8E0', marginBottom: 10 }}>Strategic Opportunities</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: '#E20074', marginBottom: 10 }}>Strategic Opportunities</div>
             {[
-              { label: 'Market opportunity (28 growth states)', value: '$12.5B+', color: '#10B981' },
-              { label: 'Customer experience improvement', value: '$8.5B+', color: '#F59E0B' },
-              { label: 'Plan competitiveness gap closure', value: '$3.2B+', color: '#E20074' },
-              { label: 'Total addressable opportunity', value: '$24.2B+', color: '#00A8E0' },
+              { label: 'Market opportunity (14 growth states)', value: '$9.8B+', color: '#10B981' },
+              { label: 'Customer experience improvement', value: '$3.3B+', color: '#F59E0B' },
+              { label: 'Home Internet cross-sell expansion', value: '$1.2B+', color: '#E20074' },
+              { label: 'Total addressable opportunity', value: '$14.3B+', color: '#E20074' },
             ].map(item => (
               <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #1E2D45' }}>
                 <span style={{ fontSize: 12, color: '#94A3B8' }}>{item.label}</span>
@@ -230,12 +230,12 @@ const DocumentExport = () => {
             ))}
           </div>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#00A8E0', marginBottom: 10 }}>Key Dashboard Metrics</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: '#E20074', marginBottom: 10 }}>Key Dashboard Metrics</div>
             {[
-              { label: 'States with AT&T leadership', value: '18/51' },
-              { label: 'High opportunity states', value: '28 states' },
-              { label: 'AT&T NPS vs T-Mobile gap', value: '−10 pts' },
-              { label: 'Fiber subscriber growth', value: '+12.4% QoQ' },
+              { label: 'States with T-Mobile leadership', value: '10/51' },
+              { label: 'High opportunity states', value: '14 states' },
+              { label: 'T-Mobile NPS lead vs AT&T', value: '+10 pts' },
+              { label: 'Home Internet subscriber growth', value: '+18.0% QoQ' },
               { label: 'Data refresh rate', value: 'Real-time (3s)' },
             ].map(item => (
               <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #1E2D45' }}>
@@ -252,7 +252,7 @@ const DocumentExport = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
           {[
             { name: 'API Gateway', port: 8080, tech: 'Spring Cloud Gateway', purpose: 'Single entry, routing, auth, rate limiting', color: '#F59E0B' },
-            { name: 'State Analytics', port: 8081, tech: 'Spring Boot + JPA', purpose: 'Market share per state, regional trends', color: '#00A8E0' },
+            { name: 'State Analytics', port: 8081, tech: 'Spring Boot + JPA', purpose: 'Market share per state, regional trends', color: '#E20074' },
             { name: 'Provider Service', port: 8082, tech: 'Spring Boot + JPA', purpose: 'Provider master data, coverage metrics', color: '#10B981' },
             { name: 'Feedback Service', port: 8083, tech: 'Spring Boot + NLP', purpose: 'Sentiment analysis, NPS, review aggregation', color: '#E20074' },
             { name: 'Plan Comparison', port: 8084, tech: 'Spring Boot + JPA', purpose: 'Plan catalog, feature comparison APIs', color: '#8B5CF6' },
@@ -274,14 +274,14 @@ const DocumentExport = () => {
       <Section title="📨 Kafka Event Topics">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {[
-            { topic: 'att.state.data.updates', producer: 'State Analytics', consumer: 'Event Streaming', desc: 'State market share changed events' },
-            { topic: 'att.provider.updates', producer: 'Provider Service', consumer: 'State Analytics, Event Streaming', desc: 'Provider KPI metric updates' },
-            { topic: 'att.feedback.aggregated', producer: 'Feedback Service', consumer: 'Event Streaming', desc: 'Aggregated sentiment score events' },
-            { topic: 'att.plan.updates', producer: 'Plan Comparison', consumer: 'Event Streaming', desc: 'Plan price/feature change events' },
-            { topic: 'att.realtime.feed', producer: 'Event Streaming', consumer: 'WebSocket → Frontend', desc: 'Live subscriber activity events' },
+            { topic: 'tmo.state.data.updates', producer: 'State Analytics', consumer: 'Event Streaming', desc: 'State market share changed events' },
+            { topic: 'tmo.provider.updates', producer: 'Provider Service', consumer: 'State Analytics, Event Streaming', desc: 'Provider KPI metric updates' },
+            { topic: 'tmo.feedback.aggregated', producer: 'Feedback Service', consumer: 'Event Streaming', desc: 'Aggregated sentiment score events' },
+            { topic: 'tmo.plan.updates', producer: 'Plan Comparison', consumer: 'Event Streaming', desc: 'Plan price/feature change events' },
+            { topic: 'tmo.realtime.feed', producer: 'Event Streaming', consumer: 'WebSocket → Frontend', desc: 'Live subscriber activity events' },
           ].map(t => (
             <div key={t.topic} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1.5fr 2fr', gap: 12, padding: '10px 14px', background: '#060D18', borderRadius: 8, alignItems: 'center' }}>
-              <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#00A8E0' }}>{t.topic}</span>
+              <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#E20074' }}>{t.topic}</span>
               <span style={{ fontSize: 11, color: '#10B981' }}>⬆ {t.producer}</span>
               <span style={{ fontSize: 11, color: '#F59E0B' }}>⬇ {t.consumer}</span>
               <span style={{ fontSize: 11, color: '#64748B' }}>{t.desc}</span>
@@ -294,7 +294,7 @@ const DocumentExport = () => {
       <Section title="🚀 How to Run">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#00A8E0', marginBottom: 10 }}>Backend (Docker Compose)</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#E20074', marginBottom: 10 }}>Backend (Docker Compose)</div>
             <AsciiDiagram content={`cd ATT_DASHBOARD/backend
 docker-compose up -d
 
@@ -309,7 +309,7 @@ docker-compose up -d
 # Event Svc     :8085`} />
           </div>
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#00A8E0', marginBottom: 10 }}>Frontend (React Dev Server)</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#E20074', marginBottom: 10 }}>Frontend (React Dev Server)</div>
             <AsciiDiagram content={`cd ATT_DASHBOARD/frontend
 npm install
 npm start

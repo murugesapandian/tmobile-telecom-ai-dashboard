@@ -12,12 +12,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @OpenAPIDefinition(
     info = @Info(
-        title = "AT&T State Analytics API",
+        title = "T-Mobile State Analytics API",
         version = "1.0.0",
         description = "Market share analytics and competitive intelligence for all 50 US states. " +
                       "Also exposes the /logs endpoint for storing and querying application logs. " +
-                      "NOTE: All market data is illustrative/simulated — not sourced from AT&T internal systems.",
-        contact = @Contact(name = "AT&T Business & Strategy Team", email = "murugesapandian@gmail.com")
+                      "NOTE: All market data is illustrative/simulated — not sourced from T-Mobile internal systems.",
+        contact = @Contact(name = "T-Mobile Business & Strategy Team", email = "murugesapandian@gmail.com")
     ),
     servers = {
         @Server(url = "http://localhost:8081", description = "Direct service"),

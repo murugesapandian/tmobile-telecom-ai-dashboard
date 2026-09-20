@@ -61,9 +61,9 @@ public class FeedbackController {
         return ResponseEntity.ok(feedbackService.getNpsComparison());
     }
 
-    @GetMapping("/att/improvement-areas")
-    @Operation(summary = "Get AT&T strategic improvement areas")
-    public ResponseEntity<List<Map<String, Object>>> getAttImprovementAreas() {
-        return ResponseEntity.ok(feedbackService.getAttImprovementAreas());
+    @GetMapping("/tmobile/improvement-areas")
+    @Operation(summary = "Get T-Mobile strategic improvement areas")
+    public ResponseEntity<List<Map<String, Object>>> getTmobileImprovementAreas() {
+        return ResponseEntity.ok(feedbackService.getTmobileImprovementAreas());
     }
 }

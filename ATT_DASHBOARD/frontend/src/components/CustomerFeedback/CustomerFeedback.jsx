@@ -5,7 +5,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
   BarChart, Bar, Cell,
 } from 'recharts';
-import { CUSTOMER_FEEDBACK, FEEDBACK_CATEGORIES, ATT_IMPROVEMENT_AREAS } from '../../data/feedbackData';
+import { CUSTOMER_FEEDBACK, FEEDBACK_CATEGORIES, TMOBILE_IMPROVEMENT_AREAS } from '../../data/feedbackData';
 
 const StarRating = ({ score, color }) => {
   const stars = Math.round(score);
@@ -145,7 +145,7 @@ const FeedbackCard = ({ feedback, isExpanded, onToggle }) => (
 );
 
 const CustomerFeedback = () => {
-  const [expandedProvider, setExpandedProvider] = useState('AT&T');
+  const [expandedProvider, setExpandedProvider] = useState('T-Mobile');
   const [activeTab, setActiveTab] = useState('rankings');
 
   const handleTabChange = (tab) => {
@@ -169,7 +169,7 @@ const CustomerFeedback = () => {
     ...CUSTOMER_FEEDBACK.reduce((acc, f) => ({ ...acc, [f.provider]: f.monthlyTrend[i]?.score }), {}),
   }));
 
-  const attImprovements = ATT_IMPROVEMENT_AREAS;
+  const tmobileImprovements = TMOBILE_IMPROVEMENT_AREAS;
 
   return (
     <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -179,13 +179,13 @@ const CustomerFeedback = () => {
           { id: 'rankings', label: '📊 Provider Rankings' },
           { id: 'trends', label: '📈 Satisfaction Trends' },
           { id: 'radar', label: '🎯 Competitive Radar' },
-          { id: 'opportunities', label: '💡 AT&T Opportunities' },
+          { id: 'opportunities', label: '💡 T-Mobile Opportunities' },
         ].map(tab => (
           <button key={tab.id} onClick={() => handleTabChange(tab.id)}
             style={{
               padding: '10px 18px', background: 'transparent', border: 'none',
-              borderBottom: `2px solid ${activeTab === tab.id ? '#00A8E0' : 'transparent'}`,
-              color: activeTab === tab.id ? '#00A8E0' : '#64748B', cursor: 'pointer',
+              borderBottom: `2px solid ${activeTab === tab.id ? '#E20074' : 'transparent'}`,
+              color: activeTab === tab.id ? '#E20074' : '#64748B', cursor: 'pointer',
               fontSize: 13, fontWeight: activeTab === tab.id ? 600 : 400, transition: 'all 0.2s', marginBottom: -1,
             }}>
             {tab.label}
@@ -196,9 +196,9 @@ const CustomerFeedback = () => {
       {/* Tab: Rankings */}
       {activeTab === 'rankings' && (
         <div>
-          <div style={{ marginBottom: 16, padding: '12px 16px', background: 'rgba(0,168,224,0.06)', border: '1px solid rgba(0,168,224,0.15)', borderRadius: 10 }}>
+          <div style={{ marginBottom: 16, padding: '12px 16px', background: 'rgba(226,0,116,0.06)', border: '1px solid rgba(226,0,116,0.15)', borderRadius: 10 }}>
             <span style={{ fontSize: 13, color: '#94A3B8' }}>
-              Showing <strong style={{ color: '#00A8E0' }}>Top 5 telecom providers</strong> ranked by overall customer satisfaction score. Data aggregated from 1.3M+ verified reviews.
+              Showing <strong style={{ color: '#E20074' }}>Top 5 telecom providers</strong> ranked by overall customer satisfaction score. Data aggregated from 1.3M+ verified reviews.
             </span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -228,7 +228,7 @@ const CustomerFeedback = () => {
                 <Tooltip contentStyle={{ background: '#0D1526', border: '1px solid #1E2D45', borderRadius: 8, fontSize: 12 }} formatter={(v) => [v?.toFixed(2), '']} />
                 <Legend wrapperStyle={{ fontSize: 12, color: '#94A3B8' }} />
                 {CUSTOMER_FEEDBACK.map(f => (
-                  <Line key={f.provider} type="monotone" dataKey={f.provider} stroke={f.color} strokeWidth={f.provider === 'AT&T' ? 3 : 1.5} dot={false} strokeDasharray={f.provider === 'AT&T' ? 'none' : f.rank > 3 ? '5 3' : 'none'} />
+                  <Line key={f.provider} type="monotone" dataKey={f.provider} stroke={f.color} strokeWidth={f.provider === 'T-Mobile' ? 3 : 1.5} dot={false} strokeDasharray={f.provider === 'T-Mobile' ? 'none' : f.rank > 3 ? '5 3' : 'none'} />
                 ))}
               </LineChart>
             </ResponsiveContainer>
@@ -269,21 +269,21 @@ const CustomerFeedback = () => {
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
-            <div style={{ marginTop: 16, padding: '12px 16px', background: 'rgba(0,168,224,0.06)', border: '1px solid rgba(0,168,224,0.15)', borderRadius: 10, fontSize: 12, color: '#94A3B8' }}>
-              <strong style={{ color: '#00A8E0' }}>AT&T NPS gap:</strong> T-Mobile leads by 10 points. Closing this gap could drive <strong style={{ color: '#10B981' }}>$4B+ annual revenue</strong> through reduced churn.
+            <div style={{ marginTop: 16, padding: '12px 16px', background: 'rgba(226,0,116,0.06)', border: '1px solid rgba(226,0,116,0.15)', borderRadius: 10, fontSize: 12, color: '#94A3B8' }}>
+              <strong style={{ color: '#E20074' }}>T-Mobile NPS lead:</strong> +4 points ahead of Verizon and +10 ahead of AT&T. Sustaining this lead protects an estimated <strong style={{ color: '#10B981' }}>$4B+ in reduced-churn value</strong> annually.
             </div>
           </div>
         </div>
       )}
 
-      {/* Tab: AT&T Opportunities */}
+      {/* Tab: T-Mobile Opportunities */}
       {activeTab === 'opportunities' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div style={{ padding: '14px 18px', background: 'rgba(0,168,224,0.08)', border: '1px solid rgba(0,168,224,0.2)', borderRadius: 12 }}>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#00A8E0', marginBottom: 4 }}>Strategic Insight for AT&T Leadership</div>
-            <div style={{ fontSize: 13, color: '#94A3B8' }}>Based on customer feedback analysis, these are the highest-priority improvement areas to close the satisfaction gap with T-Mobile and Verizon.</div>
+          <div style={{ padding: '14px 18px', background: 'rgba(226,0,116,0.08)', border: '1px solid rgba(226,0,116,0.2)', borderRadius: 12 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#E20074', marginBottom: 4 }}>Strategic Insight for T-Mobile Leadership</div>
+            <div style={{ fontSize: 13, color: '#94A3B8' }}>T-Mobile already leads overall satisfaction and NPS. These are the highest-priority remaining gaps to widen the lead over Verizon and AT&T and reduce churn risk in specific categories.</div>
           </div>
-          {attImprovements.map((item, i) => (
+          {tmobileImprovements.map((item, i) => (
             <div key={i} style={{
               background: 'linear-gradient(145deg, #111C2E, #0D1526)', border: '1px solid #1E2D45',
               borderRadius: 16, padding: 24,

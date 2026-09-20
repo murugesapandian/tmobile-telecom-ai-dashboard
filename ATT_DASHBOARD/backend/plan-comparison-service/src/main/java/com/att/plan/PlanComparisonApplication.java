@@ -10,12 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @OpenAPIDefinition(
     info = @Info(
-        title = "AT&T Plan Comparison API",
+        title = "T-Mobile Plan Comparison API",
         version = "1.0.0",
-        description = "Wireless and broadband plan comparison across AT&T, Verizon, T-Mobile, Comcast, " +
+        description = "Wireless and broadband plan comparison across T-Mobile, Verizon, AT&T, Comcast, " +
                       "and Spectrum. Price data is based on publicly available provider website pricing " +
-                      "as of early 2025 — not connected to AT&T OPUS live catalog.",
-        contact = @Contact(name = "AT&T Business & Strategy Team", email = "murugesapandian@gmail.com")
+                      "as of early 2025 — not connected to any live provider catalog.",
+        contact = @Contact(name = "T-Mobile Business & Strategy Team", email = "murugesapandian@gmail.com")
     ),
     servers = {
         @Server(url = "http://localhost:8084", description = "Direct service"),
